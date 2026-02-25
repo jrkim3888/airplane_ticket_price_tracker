@@ -1,0 +1,15 @@
+# DB
+flight_tracker.db
+
+# 디버그/테스트
+debug_*.py
+test_*.py
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# 기타
+.DS_Store
