@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-02-25T19:09:29.583903+09:00",
+  "updated_at": "2026-02-25T19:13:02.503689+09:00",
   "routes": [
     {
       "origin": "ICN",
@@ -492,9 +492,19 @@
           "min_price": 612500,
           "airline": "아시아나항공",
           "flight_info": "18:30 ICN→NRT 21:00 / 19:45 NRT→ICN 22:15",
+          "kal_price": 666100,
+          "kal_flight_info": "18:35 ICN→NRT 21:05 / 20:55 NRT→ICN 23:25",
+          "updated_at": "2026-02-25T19:09:50.558972+09:00"
+        },
+        {
+          "depart_date": "2026-05-29",
+          "return_date": "2026-05-31",
+          "min_price": 297500,
+          "airline": "아시아나항공",
+          "flight_info": "18:30 ICN→NRT 21:00 / 19:45 NRT→ICN 22:15",
           "kal_price": null,
           "kal_flight_info": null,
-          "updated_at": "2026-02-25T17:09:45.128869+09:00"
+          "updated_at": "2026-02-25T19:10:01.649637+09:00"
         },
         {
           "depart_date": "2026-06-05",
@@ -504,7 +514,7 @@
           "flight_info": "18:30 ICN→NRT 21:00 / 19:45 NRT→ICN 22:15",
           "kal_price": 599100,
           "kal_flight_info": "18:35 ICN→NRT 21:05 / 20:55 NRT→ICN 23:25",
-          "updated_at": "2026-02-25T16:10:42.128218+09:00"
+          "updated_at": "2026-02-25T19:10:14.758134+09:00"
         },
         {
           "depart_date": "2026-06-12",
@@ -693,7 +703,7 @@
           "flight_info": "19:40 GMP→HND 21:45 / 19:30 HND→GMP 22:05",
           "kal_price": 702200,
           "kal_flight_info": "19:30 GMP→HND 21:35 / 19:50 HND→GMP 22:25",
-          "updated_at": "2026-02-25T18:11:30.399200+09:00"
+          "updated_at": "2026-02-25T19:11:00.817975+09:00"
         },
         {
           "depart_date": "2026-03-13",
@@ -701,9 +711,9 @@
           "min_price": 621700,
           "airline": "일본항공",
           "flight_info": "19:40 GMP→HND 21:45 / 19:30 HND→GMP 22:05",
-          "kal_price": 700300,
-          "kal_flight_info": "19:30 GMP→HND 21:35 / 19:30 HND→GMP 22:05",
-          "updated_at": "2026-02-25T18:11:43.700227+09:00"
+          "kal_price": 709500,
+          "kal_flight_info": "19:30 GMP→HND 21:35 / 19:50 HND→GMP 22:25",
+          "updated_at": "2026-02-25T19:11:12.907994+09:00"
         },
         {
           "depart_date": "2026-03-20",
@@ -713,7 +723,7 @@
           "flight_info": "19:40 GMP→HND 21:45 / 19:30 HND→GMP 22:05",
           "kal_price": 700100,
           "kal_flight_info": "19:30 GMP→HND 21:35 / 19:50 HND→GMP 22:25",
-          "updated_at": "2026-02-25T18:11:55.588754+09:00"
+          "updated_at": "2026-02-25T19:11:23.982852+09:00"
         },
         {
           "depart_date": "2026-03-27",
@@ -723,7 +733,7 @@
           "flight_info": "19:35 GMP→HND 21:45 / 20:05 HND→GMP 22:25",
           "kal_price": 700300,
           "kal_flight_info": "19:30 GMP→HND 21:35 / 18:55 HND→GMP 21:15",
-          "updated_at": "2026-02-25T18:12:08.570782+09:00"
+          "updated_at": "2026-02-25T19:11:35.340200+09:00"
         },
         {
           "depart_date": "2026-04-03",
@@ -733,7 +743,7 @@
           "flight_info": "19:55 GMP→HND 22:15 / 20:05 HND→GMP 22:20",
           "kal_price": 650600,
           "kal_flight_info": "18:40 GMP→HND 21:00 / 19:45 HND→GMP 22:05",
-          "updated_at": "2026-02-25T18:12:21.267373+09:00"
+          "updated_at": "2026-02-25T19:11:47.938194+09:00"
         },
         {
           "depart_date": "2026-04-10",
@@ -743,7 +753,7 @@
           "flight_info": "19:15 GMP→HND 21:30 / 18:55 HND→GMP 21:15",
           "kal_price": 650600,
           "kal_flight_info": "18:40 GMP→HND 21:00 / 19:45 HND→GMP 22:05",
-          "updated_at": "2026-02-25T18:12:32.247121+09:00"
+          "updated_at": "2026-02-25T19:12:00.975342+09:00"
         },
         {
           "depart_date": "2026-04-17",
@@ -753,7 +763,7 @@
           "flight_info": "19:55 GMP→HND 22:15 / 20:05 HND→GMP 22:20",
           "kal_price": 610100,
           "kal_flight_info": "18:40 GMP→HND 21:00 / 19:45 HND→GMP 22:05",
-          "updated_at": "2026-02-25T18:12:43.726729+09:00"
+          "updated_at": "2026-02-25T19:12:12.344472+09:00"
         },
         {
           "depart_date": "2026-04-24",
@@ -763,7 +773,7 @@
           "flight_info": "19:50 GMP→HND 22:00 / 20:05 HND→GMP 22:25",
           "kal_price": 578600,
           "kal_flight_info": "18:40 GMP→HND 21:00 / 19:45 HND→GMP 22:05",
-          "updated_at": "2026-02-25T18:12:54.146782+09:00"
+          "updated_at": "2026-02-25T19:12:25.487276+09:00"
         },
         {
           "depart_date": "2026-05-01",
@@ -773,7 +783,7 @@
           "flight_info": "19:15 GMP→HND 21:30 / 18:55 HND→GMP 21:15",
           "kal_price": 684300,
           "kal_flight_info": "18:40 GMP→HND 21:00 / 19:45 HND→GMP 22:05",
-          "updated_at": "2026-02-25T18:13:05.129897+09:00"
+          "updated_at": "2026-02-25T19:12:36.943300+09:00"
         },
         {
           "depart_date": "2026-05-08",
@@ -783,7 +793,7 @@
           "flight_info": "19:55 GMP→HND 22:15 / 20:05 HND→GMP 22:20",
           "kal_price": 567300,
           "kal_flight_info": "18:40 GMP→HND 21:00 / 19:45 HND→GMP 22:05",
-          "updated_at": "2026-02-25T18:13:16.079277+09:00"
+          "updated_at": "2026-02-25T19:12:48.613747+09:00"
         },
         {
           "depart_date": "2026-05-15",
@@ -791,9 +801,9 @@
           "min_price": 490000,
           "airline": "전일본공수",
           "flight_info": "19:55 GMP→HND 22:15 / 20:05 HND→GMP 22:20",
-          "kal_price": 578600,
+          "kal_price": 589500,
           "kal_flight_info": "18:40 GMP→HND 21:00 / 19:45 HND→GMP 22:05",
-          "updated_at": "2026-02-25T18:13:28.436024+09:00"
+          "updated_at": "2026-02-25T19:12:59.016795+09:00"
         },
         {
           "depart_date": "2026-05-22",
