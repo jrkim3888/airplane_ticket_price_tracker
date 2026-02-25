@@ -40,6 +40,29 @@ CREATE TABLE IF NOT EXISTS scan_history (
 
 CREATE UNIQUE INDEX IF NOT EXISTS idx_weekly_lowest_route_dates
     ON weekly_lowest(route_id, depart_date, return_date);
+
+CREATE TABLE IF NOT EXISTS price_history (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    route_id INTEGER,
+    snapshot_at TEXT,
+    overall_min_price INTEGER,
+    airline TEXT,
+    depart_date TEXT,
+    flight_info TEXT,
+    FOREIGN KEY (route_id) REFERENCES routes(id)
+);
+
+CREATE TABLE IF NOT EXISTS weekly_price_history (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    route_id INTEGER,
+    depart_date TEXT,
+    return_date TEXT,
+    snapshot_at TEXT,
+    min_price INTEGER,
+    airline TEXT,
+    flight_info TEXT,
+    FOREIGN KEY (route_id) REFERENCES routes(id)
+);
 """
 
 
@@ -158,3 +181,32 @@ async def get_routes(db):
     """전체 routes를 반환."""
     cursor = await db.execute("SELECT * FROM routes ORDER BY id")
     return await cursor.fetchall()
+
+
+async def insert_price_snapshot(db, route_id: int, snapshot_at: str,
+                                 overall_min_price: int, airline: str,
+                                 depart_date: str, flight_info: str):
+    """구간 전체 최저가 스냅샷을 price_history에 기록한다."""
+    await db.execute(
+        "INSERT INTO price_history (route_id, snapshot_at, overall_min_price, airline, depart_date, flight_info) "
+        "VALUES (?, ?, ?, ?, ?, ?)",
+        (route_id, snapshot_at, overall_min_price, airline, depart_date, flight_info),
+    )
+
+
+async def insert_weekly_price_snapshot(db, route_id: int, depart_date: str,
+                                        return_date: str, snapshot_at: str,
+                                        min_price: int, airline: str, flight_info: str):
+    """주별 최저가 스냅샷을 weekly_price_history에 기록한다. 중복 방지(같은 시간+같은 가격)."""
+    existing = await db.execute(
+        "SELECT 1 FROM weekly_price_history "
+        "WHERE route_id=? AND depart_date=? AND substr(snapshot_at,1,13)=substr(?,1,13) AND min_price=?",
+        (route_id, depart_date, snapshot_at, min_price)
+    )
+    if await existing.fetchone():
+        return
+    await db.execute(
+        "INSERT INTO weekly_price_history (route_id, depart_date, return_date, snapshot_at, min_price, airline, flight_info) "
+        "VALUES (?, ?, ?, ?, ?, ?, ?)",
+        (route_id, depart_date, return_date, snapshot_at, min_price, airline, flight_info),
+    )

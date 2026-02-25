@@ -19,7 +19,8 @@ from config import (
     NAVER_FLIGHT_URL, REQUEST_DELAY_MIN, REQUEST_DELAY_MAX, MAX_RETRIES,
     DISCORD_CHANNEL_ID, DEPART_TIME_FROM, RETURN_TIME_FROM,
 )
-from db import init_db, get_db, insert_scan, update_weekly_lowest
+from db import (init_db, get_db, insert_scan, update_weekly_lowest,
+                insert_price_snapshot, insert_weekly_price_snapshot)
 
 logging.basicConfig(
     level=logging.INFO,
@@ -438,9 +439,44 @@ async def main():
 
         await browser.close()
 
-    # 스캔 완료 후 data.json 내보내기 + GitHub push
+    # 스캔 완료 후 스냅샷 기록
+    await record_snapshots()
+    # data.json 내보내기 + GitHub push
     await export_and_push()
     logger.info("항공권 가격 트래커 완료")
+
+
+async def record_snapshots():
+    """전체 weekly_lowest 기준으로 price_history / weekly_price_history 스냅샷을 기록한다."""
+    db = await get_db()
+    now_str = datetime.now(KST).isoformat()
+    try:
+        rows = await db.execute(
+            "SELECT route_id, depart_date, return_date, min_price, airline, flight_info "
+            "FROM weekly_lowest ORDER BY route_id, min_price"
+        )
+        rows = await rows.fetchall()
+
+        # 구간별 전체 최저가 (min_price 기준 첫 번째 row)
+        seen_routes = set()
+        for row in rows:
+            rid = row["route_id"]
+            if rid not in seen_routes:
+                seen_routes.add(rid)
+                await insert_price_snapshot(
+                    db, rid, now_str,
+                    row["min_price"], row["airline"],
+                    row["depart_date"], row["flight_info"]
+                )
+            # 주별 스냅샷
+            await insert_weekly_price_snapshot(
+                db, rid, row["depart_date"], row["return_date"],
+                now_str, row["min_price"], row["airline"], row["flight_info"]
+            )
+        await db.commit()
+        logger.info(f"스냅샷 기록 완료 ({len(rows)}개 주)")
+    finally:
+        await db.close()
 
 
 async def export_and_push():
@@ -481,6 +517,43 @@ async def export_and_push():
                 "updated_at": row["updated_at"],
             })
         data["routes"] = list(route_map.values())
+
+        # route_id → route_map key 매핑 (ROUTES 순서 기반)
+        rid_to_key = {
+            i + 1: f"{r['origin']}-{r['destination']}"
+            for i, r in enumerate(ROUTES)
+        }
+
+        # price_history: 구간별 전체 최저가 시계열
+        ph_rows = await db.execute(
+            "SELECT route_id, snapshot_at, overall_min_price, airline, depart_date "
+            "FROM price_history ORDER BY route_id, snapshot_at"
+        )
+        for row in await ph_rows.fetchall():
+            key = rid_to_key.get(row["route_id"])
+            if key and key in route_map:
+                route_map[key].setdefault("overall_history", []).append({
+                    "snapshot_at": row["snapshot_at"],
+                    "price": row["overall_min_price"],
+                    "airline": row["airline"],
+                    "depart_date": row["depart_date"],
+                })
+
+        # weekly_price_history: 주별 최저가 시계열
+        wph_rows = await db.execute(
+            "SELECT route_id, depart_date, return_date, snapshot_at, min_price, airline "
+            "FROM weekly_price_history ORDER BY route_id, depart_date, snapshot_at"
+        )
+        for row in await wph_rows.fetchall():
+            key = rid_to_key.get(row["route_id"])
+            if key and key in route_map:
+                wh = route_map[key].setdefault("weekly_history", {})
+                wh.setdefault(row["depart_date"], []).append({
+                    "snapshot_at": row["snapshot_at"],
+                    "price": row["min_price"],
+                    "airline": row["airline"],
+                })
+
     finally:
         await db.close()
 
