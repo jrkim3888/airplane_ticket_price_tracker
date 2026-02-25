@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { Route } from "@/lib/types";
 import {
   formatPrice,
@@ -6,12 +9,60 @@ import {
   getNaverLink,
 } from "@/lib/utils";
 
+type SortKey = "depart_date" | "min_price" | "kal_price";
+type SortDir = "asc" | "desc";
+
 export default function WeeklyTable({ route }: { route: Route }) {
   const today = new Date().toISOString().split("T")[0];
-  const sorted = [...route.weeks]
-    .filter((w) => w.depart_date >= today)
-    .sort((a, b) => a.min_price - b.min_price);
-  const lowestPrice = sorted[0]?.min_price;
+  const [sortKey, setSortKey] = useState<SortKey>("depart_date");
+  const [sortDir, setSortDir] = useState<SortDir>("asc");
+
+  const handleSort = (key: SortKey) => {
+    if (sortKey === key) {
+      setSortDir((d) => (d === "asc" ? "desc" : "asc"));
+    } else {
+      setSortKey(key);
+      setSortDir("asc");
+    }
+  };
+
+  const future = route.weeks.filter((w) => w.depart_date >= today);
+
+  const sorted = [...future].sort((a, b) => {
+    let av: number, bv: number;
+    if (sortKey === "depart_date") {
+      av = new Date(a.depart_date).getTime();
+      bv = new Date(b.depart_date).getTime();
+    } else if (sortKey === "min_price") {
+      av = a.min_price;
+      bv = b.min_price;
+    } else {
+      // kal_price: null을 맨 뒤로
+      av = a.kal_price ?? Infinity;
+      bv = b.kal_price ?? Infinity;
+    }
+    return sortDir === "asc" ? av - bv : bv - av;
+  });
+
+  const lowestPrice = [...future].sort((a, b) => a.min_price - b.min_price)[0]
+    ?.min_price;
+
+  const SortBtn = ({ col, label }: { col: SortKey; label: string }) => {
+    const active = sortKey === col;
+    return (
+      <button
+        onClick={() => handleSort(col)}
+        className={`flex items-center gap-0.5 group ${
+          active ? "text-blue-600" : "text-gray-600 hover:text-gray-900"
+        }`}
+      >
+        {label}
+        <span className="text-xs ml-0.5">
+          {active ? (sortDir === "asc" ? "↑" : "↓") : <span className="text-gray-300 group-hover:text-gray-400">↕</span>}
+        </span>
+      </button>
+    );
+  };
 
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
@@ -24,9 +75,13 @@ export default function WeeklyTable({ route }: { route: Route }) {
         <table className="w-full text-sm">
           <thead>
             <tr className="bg-gray-50 text-gray-600">
-              <th className="px-3 py-2 text-left font-medium">출발일</th>
+              <th className="px-3 py-2 text-left font-medium">
+                <SortBtn col="depart_date" label="출발일" />
+              </th>
               <th className="px-3 py-2 text-left font-medium">귀국일</th>
-              <th className="px-3 py-2 text-right font-medium">최저가</th>
+              <th className="px-3 py-2 text-right font-medium">
+                <SortBtn col="min_price" label="최저가" />
+              </th>
               <th className="px-3 py-2 text-left font-medium">항공사</th>
               <th className="px-3 py-2 text-left font-medium hidden sm:table-cell">
                 가는편
@@ -34,7 +89,9 @@ export default function WeeklyTable({ route }: { route: Route }) {
               <th className="px-3 py-2 text-left font-medium hidden sm:table-cell">
                 오는편
               </th>
-              <th className="px-3 py-2 text-right font-medium">KAL</th>
+              <th className="px-3 py-2 text-right font-medium">
+                <SortBtn col="kal_price" label="KAL" />
+              </th>
               <th className="px-3 py-2 text-center font-medium">링크</th>
             </tr>
           </thead>
