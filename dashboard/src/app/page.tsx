@@ -2,6 +2,9 @@ import { fetchFlightData } from "@/lib/data";
 import { formatDateTime } from "@/lib/utils";
 import RouteSection from "@/components/RouteSection";
 
+// Vercel ISR: 5분마다 재검증
+export const revalidate = 300;
+
 export default async function Home() {
   const data = await fetchFlightData();
 
