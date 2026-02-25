@@ -438,7 +438,76 @@ async def main():
 
         await browser.close()
 
+    # 스캔 완료 후 data.json 내보내기 + GitHub push
+    await export_and_push()
     logger.info("항공권 가격 트래커 완료")
+
+
+async def export_and_push():
+    """DB → data.json 내보내기 후 GitHub에 push한다."""
+    import os, pathlib
+    db = await get_db()
+    try:
+        route_labels = {r["destination"]: r["label"] for r in ROUTES}
+        rows = await db.execute("""
+            SELECT r.origin, r.destination,
+                   w.depart_date, w.return_date,
+                   w.min_price, w.airline, w.flight_info,
+                   w.kal_price, w.kal_flight_info,
+                   w.updated_at
+            FROM weekly_lowest w
+            JOIN routes r ON w.route_id = r.id
+            ORDER BY r.id, w.depart_date
+        """)
+        data = {"updated_at": datetime.now(KST).isoformat(), "routes": []}
+        route_map = {}
+        async for row in rows:
+            key = f"{row['origin']}-{row['destination']}"
+            if key not in route_map:
+                route_map[key] = {
+                    "origin": row["origin"],
+                    "destination": row["destination"],
+                    "label": route_labels.get(row["destination"], row["destination"]),
+                    "weeks": []
+                }
+            route_map[key]["weeks"].append({
+                "depart_date": row["depart_date"],
+                "return_date": row["return_date"],
+                "min_price": row["min_price"],
+                "airline": row["airline"],
+                "flight_info": row["flight_info"],
+                "kal_price": row["kal_price"],
+                "kal_flight_info": row["kal_flight_info"],
+                "updated_at": row["updated_at"],
+            })
+        data["routes"] = list(route_map.values())
+    finally:
+        await db.close()
+
+    repo_dir = pathlib.Path(__file__).parent
+    data_path = repo_dir / "data.json"
+    with open(data_path, "w", encoding="utf-8") as f:
+        _json.dump(data, f, ensure_ascii=False, indent=2)
+    logger.info(f"data.json 저장 완료 ({len(data['routes'])}개 구간)")
+
+    try:
+        subprocess.run(["git", "-C", str(repo_dir), "add", "data.json"], check=True)
+        result = subprocess.run(
+            ["git", "-C", str(repo_dir), "diff", "--cached", "--quiet"],
+            capture_output=True
+        )
+        if result.returncode != 0:  # 변경사항 있을 때만 커밋
+            now_str = datetime.now(KST).strftime("%Y-%m-%d %H:%M KST")
+            subprocess.run(
+                ["git", "-C", str(repo_dir), "commit", "-m", f"data: {now_str} 가격 업데이트"],
+                check=True
+            )
+            subprocess.run(["git", "-C", str(repo_dir), "push"], check=True)
+            logger.info("GitHub push 완료")
+        else:
+            logger.info("변경사항 없음, push 생략")
+    except subprocess.CalledProcessError as e:
+        logger.error(f"GitHub push 실패: {e}")
 
 
 if __name__ == "__main__":
