@@ -7,7 +7,10 @@ import {
 } from "@/lib/utils";
 
 export default function WeeklyTable({ route }: { route: Route }) {
-  const sorted = [...route.weeks].sort((a, b) => a.min_price - b.min_price);
+  const today = new Date().toISOString().split("T")[0];
+  const sorted = [...route.weeks]
+    .filter((w) => w.depart_date >= today)
+    .sort((a, b) => a.min_price - b.min_price);
   const lowestPrice = sorted[0]?.min_price;
 
   return (
@@ -36,6 +39,13 @@ export default function WeeklyTable({ route }: { route: Route }) {
             </tr>
           </thead>
           <tbody>
+            {sorted.length === 0 && (
+              <tr>
+                <td colSpan={8} className="px-3 py-6 text-center text-gray-400">
+                  예정된 항공편 없음
+                </td>
+              </tr>
+            )}
             {sorted.map((week) => {
               const flights = parseFlightTimes(week.flight_info);
               const isLowest = week.min_price === lowestPrice;

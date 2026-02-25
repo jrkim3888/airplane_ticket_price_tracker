@@ -8,12 +8,15 @@ import {
 } from "@/lib/utils";
 
 export default function LowestPriceCard({ route }: { route: Route }) {
+  const today = new Date().toISOString().split("T")[0];
   const sorted = [...route.weeks]
-    .filter((w) => w.min_price > 0)
+    .filter((w) => w.min_price > 0 && w.depart_date >= today)
     .sort((a, b) => a.min_price - b.min_price);
 
   const best: WeekEntry | undefined = sorted[0];
-  const kalWeeks = route.weeks.filter((w) => w.kal_price !== null);
+  const kalWeeks = route.weeks.filter(
+    (w) => w.kal_price !== null && w.depart_date >= today
+  );
   const bestKal = kalWeeks.length
     ? kalWeeks.sort((a, b) => a.kal_price! - b.kal_price!)[0]
     : null;

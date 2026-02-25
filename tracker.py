@@ -406,10 +406,34 @@ async def scan_route(page, route_id: int, origin: str, destination: str,
         await db.close()
 
 
+async def cleanup_past_dates():
+    """오늘 이전 날짜의 weekly_lowest 행을 삭제한다."""
+    db = await get_db()
+    today_str = datetime.now(KST).date().isoformat()  # "YYYY-MM-DD"
+    try:
+        cursor = await db.execute(
+            "SELECT COUNT(*) FROM weekly_lowest WHERE depart_date < ?",
+            (today_str,)
+        )
+        count = (await cursor.fetchone())[0]
+        if count > 0:
+            await db.execute(
+                "DELETE FROM weekly_lowest WHERE depart_date < ?",
+                (today_str,)
+            )
+            await db.commit()
+            logger.info(f"과거 날짜 {count}건 삭제 (depart_date < {today_str})")
+        else:
+            logger.info("삭제할 과거 날짜 없음")
+    finally:
+        await db.close()
+
+
 async def main():
     logger.info("항공권 가격 트래커 시작")
 
     await init_db()
+    await cleanup_past_dates()
     dates = generate_scan_dates()
     logger.info(f"스캔 날짜 {len(dates)}개 생성됨")
 
