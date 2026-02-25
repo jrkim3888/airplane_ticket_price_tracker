@@ -1,0 +1,396 @@
+{
+  "updated_at": "2026-02-25T16:51:35.068964+09:00",
+  "routes": [
+    {
+      "origin": "ICN",
+      "destination": "FUK",
+      "label": "후쿠오카",
+      "weeks": [
+        {
+          "depart_date": "2026-02-27",
+          "return_date": "2026-03-01",
+          "min_price": 658744,
+          "airline": "티웨이항공",
+          "flight_info": "18:05 ICN→FUK 19:35 / 17:20 FUK→ICN 18:50",
+          "kal_price": 1272174,
+          "kal_flight_info": "18:40 ICN→FUK 20:05 / 21:05 FUK→ICN 22:35",
+          "updated_at": "2026-02-25T00:02:52.713468+09:00"
+        },
+        {
+          "depart_date": "2026-03-13",
+          "return_date": "2026-03-15",
+          "min_price": 439000,
+          "airline": "이스타항공",
+          "flight_info": "18:15 ICN→FUK 19:35 / 20:35 FUK→ICN 22:00",
+          "kal_price": null,
+          "kal_flight_info": null,
+          "updated_at": "2026-02-24T10:03:14.072425+09:00"
+        },
+        {
+          "depart_date": "2026-03-20",
+          "return_date": "2026-03-22",
+          "min_price": 431000,
+          "airline": "이스타항공",
+          "flight_info": "18:15 ICN→FUK 19:35 / 20:35 FUK→ICN 22:00",
+          "kal_price": null,
+          "kal_flight_info": null,
+          "updated_at": "2026-02-23T20:53:43.846905+09:00"
+        },
+        {
+          "depart_date": "2026-03-27",
+          "return_date": "2026-03-29",
+          "min_price": 456600,
+          "airline": "이스타항공",
+          "flight_info": "18:15 ICN→FUK 19:35 / 20:40 FUK→ICN 22:10",
+          "kal_price": null,
+          "kal_flight_info": null,
+          "updated_at": "2026-02-24T11:03:40.224995+09:00"
+        },
+        {
+          "depart_date": "2026-04-03",
+          "return_date": "2026-04-05",
+          "min_price": 429700,
+          "airline": "티웨이항공",
+          "flight_info": "18:05 ICN→FUK 19:30 / 20:30 FUK→ICN 22:00",
+          "kal_price": 476300,
+          "kal_flight_info": "18:35 ICN→FUK 20:00 / 21:05 FUK→ICN 22:35",
+          "updated_at": "2026-02-25T16:04:04.435656+09:00"
+        },
+        {
+          "depart_date": "2026-04-10",
+          "return_date": "2026-04-12",
+          "min_price": 385000,
+          "airline": "티웨이항공",
+          "flight_info": "18:05 ICN→FUK 19:30 / 20:30 FUK→ICN 22:00",
+          "kal_price": null,
+          "kal_flight_info": null,
+          "updated_at": "2026-02-25T11:04:10.349408+09:00"
+        },
+        {
+          "depart_date": "2026-04-17",
+          "return_date": "2026-04-19",
+          "min_price": 371560,
+          "airline": "티웨이항공",
+          "flight_info": "18:05 ICN→FUK 19:30 / 17:30 FUK→ICN 18:55",
+          "kal_price": null,
+          "kal_flight_info": null,
+          "updated_at": "2026-02-24T15:04:14.654900+09:00"
+        },
+        {
+          "depart_date": "2026-04-24",
+          "return_date": "2026-04-26",
+          "min_price": 345400,
+          "airline": "티웨이항공",
+          "flight_info": "18:05 ICN→FUK 19:30 / 20:30 FUK→ICN 22:00",
+          "kal_price": 436140,
+          "kal_flight_info": "18:35 ICN→FUK 20:00 / 21:05 FUK→ICN 22:35",
+          "updated_at": "2026-02-25T16:04:37.776754+09:00"
+        },
+        {
+          "depart_date": "2026-05-01",
+          "return_date": "2026-05-03",
+          "min_price": 455300,
+          "airline": "이스타항공",
+          "flight_info": "18:20 ICN→FUK 19:40 / 20:40 FUK→ICN 22:10",
+          "kal_price": null,
+          "kal_flight_info": null,
+          "updated_at": "2026-02-24T00:04:45.248976+09:00"
+        },
+        {
+          "depart_date": "2026-05-08",
+          "return_date": "2026-05-10",
+          "min_price": 303800,
+          "airline": "티웨이항공",
+          "flight_info": "18:05 ICN→FUK 19:30 / 17:30 FUK→ICN 18:55",
+          "kal_price": 409300,
+          "kal_flight_info": "18:35 ICN→FUK 20:00 / 21:05 FUK→ICN 22:35",
+          "updated_at": "2026-02-25T16:05:10.223664+09:00"
+        },
+        {
+          "depart_date": "2026-05-15",
+          "return_date": "2026-05-17",
+          "min_price": 346450,
+          "airline": "티웨이항공",
+          "flight_info": "18:05 ICN→FUK 19:30 / 20:30 FUK→ICN 22:00",
+          "kal_price": 422800,
+          "kal_flight_info": "18:35 ICN→FUK 20:00 / 21:05 FUK→ICN 22:35",
+          "updated_at": "2026-02-25T16:05:23.290527+09:00"
+        },
+        {
+          "depart_date": "2026-05-22",
+          "return_date": "2026-05-24",
+          "min_price": 451600,
+          "airline": "티웨이항공",
+          "flight_info": "18:05 ICN→FUK 19:30 / 20:30 FUK→ICN 22:00",
+          "kal_price": 476300,
+          "kal_flight_info": "18:35 ICN→FUK 20:00 / 21:05 FUK→ICN 22:35",
+          "updated_at": "2026-02-25T16:05:35.097805+09:00"
+        },
+        {
+          "depart_date": "2026-05-29",
+          "return_date": "2026-05-31",
+          "min_price": 347900,
+          "airline": "티웨이항공",
+          "flight_info": "18:05 ICN→FUK 19:30 / 20:30 FUK→ICN 22:00",
+          "kal_price": null,
+          "kal_flight_info": null,
+          "updated_at": "2026-02-25T14:05:36.197324+09:00"
+        },
+        {
+          "depart_date": "2026-06-05",
+          "return_date": "2026-06-07",
+          "min_price": 406300,
+          "airline": "티웨이항공",
+          "flight_info": "18:05 ICN→FUK 19:30 / 17:30 FUK→ICN 18:55",
+          "kal_price": null,
+          "kal_flight_info": null,
+          "updated_at": "2026-02-25T14:05:49.229972+09:00"
+        },
+        {
+          "depart_date": "2026-06-12",
+          "return_date": "2026-06-14",
+          "min_price": 339400,
+          "airline": "티웨이항공",
+          "flight_info": "18:05 ICN→FUK 19:30 / 17:30 FUK→ICN 18:55",
+          "kal_price": 424200,
+          "kal_flight_info": "18:35 ICN→FUK 20:00 / 21:05 FUK→ICN 22:35",
+          "updated_at": "2026-02-25T16:06:10.330960+09:00"
+        }
+      ]
+    },
+    {
+      "origin": "ICN",
+      "destination": "NRT",
+      "label": "도쿄 나리타",
+      "weeks": [
+        {
+          "depart_date": "2026-02-27",
+          "return_date": "2026-03-01",
+          "min_price": 642300,
+          "airline": "아시아나항공",
+          "flight_info": "18:40 ICN→NRT 21:00 / 19:35 NRT→ICN 22:25",
+          "kal_price": 707000,
+          "kal_flight_info": "18:45 ICN→NRT 21:05 / 20:40 NRT→ICN 23:25",
+          "updated_at": "2026-02-25T16:06:22.345925+09:00"
+        },
+        {
+          "depart_date": "2026-04-10",
+          "return_date": "2026-04-12",
+          "min_price": 585100,
+          "airline": "대한항공",
+          "flight_info": "18:35 ICN→NRT 21:05 / 17:20 NRT→ICN 20:00",
+          "kal_price": 585100,
+          "kal_flight_info": "18:35 ICN→NRT 21:05 / 17:20 NRT→ICN 20:00",
+          "updated_at": "2026-02-25T16:08:23.187939+09:00"
+        },
+        {
+          "depart_date": "2026-04-17",
+          "return_date": "2026-04-19",
+          "min_price": 488700,
+          "airline": "대한항공",
+          "flight_info": "18:35 ICN→NRT 21:05 / 20:55 NRT→ICN 23:25",
+          "kal_price": 502600,
+          "kal_flight_info": "18:35 ICN→NRT 21:05 / 20:55 NRT→ICN 23:25",
+          "updated_at": "2026-02-25T16:08:35.750555+09:00"
+        },
+        {
+          "depart_date": "2026-04-24",
+          "return_date": "2026-04-26",
+          "min_price": 405500,
+          "airline": "아시아나항공",
+          "flight_info": "18:30 ICN→NRT 21:00 / 19:45 NRT→ICN 22:15",
+          "kal_price": 503000,
+          "kal_flight_info": "18:35 ICN→NRT 21:05 / 20:55 NRT→ICN 23:25",
+          "updated_at": "2026-02-25T16:08:48.848644+09:00"
+        },
+        {
+          "depart_date": "2026-05-15",
+          "return_date": "2026-05-17",
+          "min_price": 396600,
+          "airline": "아시아나항공",
+          "flight_info": "18:30 ICN→NRT 21:00 / 19:45 NRT→ICN 22:15",
+          "kal_price": 433600,
+          "kal_flight_info": "18:35 ICN→NRT 21:05 / 20:55 NRT→ICN 23:25",
+          "updated_at": "2026-02-25T15:09:51.149811+09:00"
+        },
+        {
+          "depart_date": "2026-05-29",
+          "return_date": "2026-05-31",
+          "min_price": 409700,
+          "airline": "아시아나항공",
+          "flight_info": "18:30 ICN→NRT 21:00 / 19:45 NRT→ICN 22:15",
+          "kal_price": 434000,
+          "kal_flight_info": "18:35 ICN→NRT 21:05 / 20:55 NRT→ICN 23:25",
+          "updated_at": "2026-02-25T16:10:19.240623+09:00"
+        },
+        {
+          "depart_date": "2026-06-05",
+          "return_date": "2026-06-07",
+          "min_price": 500500,
+          "airline": "아시아나항공",
+          "flight_info": "18:30 ICN→NRT 21:00 / 19:45 NRT→ICN 22:15",
+          "kal_price": 599100,
+          "kal_flight_info": "18:35 ICN→NRT 21:05 / 20:55 NRT→ICN 23:25",
+          "updated_at": "2026-02-25T16:10:42.128218+09:00"
+        }
+      ]
+    },
+    {
+      "origin": "GMP",
+      "destination": "HND",
+      "label": "도쿄 하네다",
+      "weeks": [
+        {
+          "depart_date": "2026-03-06",
+          "return_date": "2026-03-08",
+          "min_price": 621700,
+          "airline": "일본항공",
+          "flight_info": "19:40 GMP→HND 21:45 / 19:30 HND→GMP 22:05",
+          "kal_price": 702200,
+          "kal_flight_info": "19:30 GMP→HND 21:35 / 19:50 HND→GMP 22:25",
+          "updated_at": "2026-02-25T16:11:39.382369+09:00"
+        },
+        {
+          "depart_date": "2026-03-13",
+          "return_date": "2026-03-15",
+          "min_price": 621700,
+          "airline": "일본항공",
+          "flight_info": "19:40 GMP→HND 21:45 / 19:30 HND→GMP 22:05",
+          "kal_price": 700300,
+          "kal_flight_info": "19:30 GMP→HND 21:35 / 19:30 HND→GMP 22:05",
+          "updated_at": "2026-02-25T16:11:51.837685+09:00"
+        },
+        {
+          "depart_date": "2026-03-20",
+          "return_date": "2026-03-22",
+          "min_price": 601960,
+          "airline": "일본항공",
+          "flight_info": "19:40 GMP→HND 21:45 / 19:30 HND→GMP 22:05",
+          "kal_price": 700100,
+          "kal_flight_info": "19:30 GMP→HND 21:35 / 19:50 HND→GMP 22:25",
+          "updated_at": "2026-02-25T16:12:04.313612+09:00"
+        },
+        {
+          "depart_date": "2026-03-27",
+          "return_date": "2026-03-29",
+          "min_price": 688500,
+          "airline": "아시아나항공",
+          "flight_info": "19:35 GMP→HND 21:45 / 20:05 HND→GMP 22:25",
+          "kal_price": 700300,
+          "kal_flight_info": "19:30 GMP→HND 21:35 / 18:55 HND→GMP 21:15",
+          "updated_at": "2026-02-25T16:12:17.321261+09:00"
+        },
+        {
+          "depart_date": "2026-04-03",
+          "return_date": "2026-04-05",
+          "min_price": 613820,
+          "airline": "전일본공수",
+          "flight_info": "19:55 GMP→HND 22:15 / 20:05 HND→GMP 22:20",
+          "kal_price": 650600,
+          "kal_flight_info": "18:40 GMP→HND 21:00 / 19:45 HND→GMP 22:05",
+          "updated_at": "2026-02-25T16:12:28.712153+09:00"
+        },
+        {
+          "depart_date": "2026-04-10",
+          "return_date": "2026-04-12",
+          "min_price": 558740,
+          "airline": "일본항공",
+          "flight_info": "19:15 GMP→HND 21:30 / 18:55 HND→GMP 21:15",
+          "kal_price": 650600,
+          "kal_flight_info": "18:40 GMP→HND 21:00 / 19:45 HND→GMP 22:05",
+          "updated_at": "2026-02-25T16:12:39.777081+09:00"
+        },
+        {
+          "depart_date": "2026-04-17",
+          "return_date": "2026-04-19",
+          "min_price": 514600,
+          "airline": "전일본공수",
+          "flight_info": "19:55 GMP→HND 22:15 / 20:05 HND→GMP 22:20",
+          "kal_price": 610100,
+          "kal_flight_info": "18:40 GMP→HND 21:00 / 19:45 HND→GMP 22:05",
+          "updated_at": "2026-02-25T16:12:50.749690+09:00"
+        },
+        {
+          "depart_date": "2026-04-24",
+          "return_date": "2026-04-26",
+          "min_price": 531700,
+          "airline": "아시아나항공",
+          "flight_info": "19:50 GMP→HND 22:00 / 20:05 HND→GMP 22:25",
+          "kal_price": 590500,
+          "kal_flight_info": "18:40 GMP→HND 21:00 / 19:45 HND→GMP 22:05",
+          "updated_at": "2026-02-25T16:13:03.748294+09:00"
+        },
+        {
+          "depart_date": "2026-05-01",
+          "return_date": "2026-05-03",
+          "min_price": 636970,
+          "airline": "일본항공",
+          "flight_info": "19:15 GMP→HND 21:30 / 18:55 HND→GMP 21:15",
+          "kal_price": 684300,
+          "kal_flight_info": "18:40 GMP→HND 21:00 / 19:45 HND→GMP 22:05",
+          "updated_at": "2026-02-25T16:13:14.618367+09:00"
+        },
+        {
+          "depart_date": "2026-05-08",
+          "return_date": "2026-05-10",
+          "min_price": 485500,
+          "airline": "전일본공수",
+          "flight_info": "19:55 GMP→HND 22:15 / 20:05 HND→GMP 22:20",
+          "kal_price": 589900,
+          "kal_flight_info": "18:40 GMP→HND 21:00 / 19:45 HND→GMP 22:05",
+          "updated_at": "2026-02-25T16:13:25.435479+09:00"
+        },
+        {
+          "depart_date": "2026-05-15",
+          "return_date": "2026-05-17",
+          "min_price": 490000,
+          "airline": "전일본공수",
+          "flight_info": "19:55 GMP→HND 22:15 / 20:05 HND→GMP 22:20",
+          "kal_price": 567300,
+          "kal_flight_info": "18:40 GMP→HND 21:00 / 19:45 HND→GMP 22:05",
+          "updated_at": "2026-02-25T16:13:38.774660+09:00"
+        },
+        {
+          "depart_date": "2026-05-22",
+          "return_date": "2026-05-24",
+          "min_price": 613820,
+          "airline": "전일본공수",
+          "flight_info": "19:55 GMP→HND 22:15 / 20:05 HND→GMP 22:20",
+          "kal_price": 661800,
+          "kal_flight_info": "18:40 GMP→HND 21:00 / 19:45 HND→GMP 22:05",
+          "updated_at": "2026-02-25T16:13:49.293081+09:00"
+        },
+        {
+          "depart_date": "2026-05-29",
+          "return_date": "2026-05-31",
+          "min_price": 522700,
+          "airline": "아시아나항공",
+          "flight_info": "19:50 GMP→HND 22:00 / 20:05 HND→GMP 22:25",
+          "kal_price": 551600,
+          "kal_flight_info": "18:40 GMP→HND 21:00 / 19:45 HND→GMP 22:05",
+          "updated_at": "2026-02-25T16:14:01.616323+09:00"
+        },
+        {
+          "depart_date": "2026-06-05",
+          "return_date": "2026-06-07",
+          "min_price": 535910,
+          "airline": "일본항공",
+          "flight_info": "19:15 GMP→HND 21:30 / 18:55 HND→GMP 21:15",
+          "kal_price": 599300,
+          "kal_flight_info": "18:40 GMP→HND 21:00 / 19:45 HND→GMP 22:05",
+          "updated_at": "2026-02-25T16:14:12.976768+09:00"
+        },
+        {
+          "depart_date": "2026-06-12",
+          "return_date": "2026-06-14",
+          "min_price": 527520,
+          "airline": "전일본공수",
+          "flight_info": "19:55 GMP→HND 22:15 / 20:05 HND→GMP 22:20",
+          "kal_price": 556600,
+          "kal_flight_info": "18:40 GMP→HND 21:00 / 19:45 HND→GMP 22:05",
+          "updated_at": "2026-02-25T16:14:23.703083+09:00"
+        }
+      ]
+    }
+  ]
+}
