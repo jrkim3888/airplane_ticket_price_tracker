@@ -479,10 +479,18 @@ async def main():
 
         await browser.close()
 
-    # 스캔 완료 후 스냅샷 기록
-    await record_snapshots()
-    # data.json 내보내기 + GitHub push
-    await export_and_push()
+    # 스냅샷 기록 — 실패해도 export는 계속
+    try:
+        await record_snapshots()
+    except Exception as e:
+        logger.error(f"스냅샷 기록 실패 (export는 계속 진행): {e}")
+
+    # data.json 내보내기 + GitHub push — 실패해도 스캔 결과는 DB에 보존됨
+    try:
+        await export_and_push()
+    except Exception as e:
+        logger.error(f"export_and_push 실패: {e}")
+
     logger.info("항공권 가격 트래커 완료")
 
 
@@ -520,10 +528,23 @@ async def record_snapshots():
 
 
 async def export_and_push():
-    """DB → data.json 내보내기 후 GitHub에 push한다."""
-    import os, pathlib
+    """DB → data.json 내보내기 후 GitHub에 push한다.
+
+    방어 설계:
+    - 메인 쿼리(weekly_lowest) 실패 → 예외 전파 (data.json 미작성)
+    - 히스토리 쿼리 실패 → 경고 로그만, 빈 히스토리로 data.json 정상 작성
+    - data.json 작성은 DB 연결 종료 후 항상 실행 (finally 외부)
+    - git push 실패 → 로그만 (파일은 이미 저장됨)
+    """
+    import pathlib
+    HISTORY_LIMIT = 200
+
+    data = {"updated_at": datetime.now(KST).isoformat(), "routes": []}
+    route_map = {}
+
     db = await get_db()
     try:
+        # ── 1. 메인 데이터: weekly_lowest (실패 시 예외 전파)
         route_labels = {r["destination"]: r["label"] for r in ROUTES}
         rows = await db.execute("""
             SELECT r.origin, r.destination,
@@ -535,8 +556,6 @@ async def export_and_push():
             JOIN routes r ON w.route_id = r.id
             ORDER BY r.id, w.depart_date
         """)
-        data = {"updated_at": datetime.now(KST).isoformat(), "routes": []}
-        route_map = {}
         async for row in rows:
             key = f"{row['origin']}-{row['destination']}"
             if key not in route_map:
@@ -544,7 +563,9 @@ async def export_and_push():
                     "origin": row["origin"],
                     "destination": row["destination"],
                     "label": route_labels.get(row["destination"], row["destination"]),
-                    "weeks": []
+                    "weeks": [],
+                    "overall_history": [],
+                    "weekly_history": {},
                 }
             route_map[key]["weeks"].append({
                 "depart_date": row["depart_date"],
@@ -558,52 +579,50 @@ async def export_and_push():
             })
         data["routes"] = list(route_map.values())
 
-        # route_id → route_map key 매핑 (ROUTES 순서 기반)
+        # ── 2. 히스토리 데이터: 실패해도 메인 데이터는 보존
         rid_to_key = {
             i + 1: f"{r['origin']}-{r['destination']}"
             for i, r in enumerate(ROUTES)
         }
+        try:
+            ph_rows = await db.execute(
+                "SELECT route_id, snapshot_at, overall_min_price, airline, depart_date "
+                "FROM price_history ORDER BY route_id, snapshot_at DESC"
+            )
+            ph_by_route: dict = {}
+            for row in await ph_rows.fetchall():
+                key = rid_to_key.get(row["route_id"])
+                if key and key in route_map:
+                    ph_by_route.setdefault(key, []).append({
+                        "snapshot_at": row["snapshot_at"],
+                        "price": row["overall_min_price"],
+                        "airline": row["airline"],
+                        "depart_date": row["depart_date"],
+                    })
+            for key, entries in ph_by_route.items():
+                route_map[key]["overall_history"] = list(reversed(entries[:HISTORY_LIMIT]))
 
-        HISTORY_LIMIT = 200  # data.json에 export할 최대 포인트 수 (구간별)
+            wph_rows = await db.execute(
+                "SELECT route_id, depart_date, snapshot_at, min_price, airline "
+                "FROM weekly_price_history ORDER BY route_id, depart_date, snapshot_at DESC"
+            )
+            wph_by_key: dict = {}
+            for row in await wph_rows.fetchall():
+                key = rid_to_key.get(row["route_id"])
+                if key and key in route_map:
+                    dd = row["depart_date"]
+                    wph_by_key.setdefault(key, {}).setdefault(dd, []).append({
+                        "snapshot_at": row["snapshot_at"],
+                        "price": row["min_price"],
+                        "airline": row["airline"],
+                    })
+            for key, dd_map in wph_by_key.items():
+                wh = route_map[key]["weekly_history"]
+                for dd, entries in dd_map.items():
+                    wh[dd] = list(reversed(entries[:HISTORY_LIMIT]))
 
-        # price_history: 구간별 전체 최저가 시계열 — 최근 200건
-        ph_rows = await db.execute(
-            "SELECT route_id, snapshot_at, overall_min_price, airline, depart_date "
-            "FROM price_history ORDER BY route_id, snapshot_at DESC"
-        )
-        ph_by_route: dict = {}
-        for row in await ph_rows.fetchall():
-            key = rid_to_key.get(row["route_id"])
-            if key and key in route_map:
-                ph_by_route.setdefault(key, []).append({
-                    "snapshot_at": row["snapshot_at"],
-                    "price": row["overall_min_price"],
-                    "airline": row["airline"],
-                    "depart_date": row["depart_date"],
-                })
-        for key, entries in ph_by_route.items():
-            # DESC로 가져왔으므로 최근 200건 → 역순 정렬해서 오름차순으로
-            route_map[key]["overall_history"] = list(reversed(entries[:HISTORY_LIMIT]))
-
-        # weekly_price_history: 주별 최저가 시계열 — depart_date별 최근 200건
-        wph_rows = await db.execute(
-            "SELECT route_id, depart_date, return_date, snapshot_at, min_price, airline "
-            "FROM weekly_price_history ORDER BY route_id, depart_date, snapshot_at DESC"
-        )
-        wph_by_key: dict = {}
-        for row in await wph_rows.fetchall():
-            key = rid_to_key.get(row["route_id"])
-            if key and key in route_map:
-                dd = row["depart_date"]
-                wph_by_key.setdefault(key, {}).setdefault(dd, []).append({
-                    "snapshot_at": row["snapshot_at"],
-                    "price": row["min_price"],
-                    "airline": row["airline"],
-                })
-        for key, dd_map in wph_by_key.items():
-            wh = route_map[key].setdefault("weekly_history", {})
-            for dd, entries in dd_map.items():
-                wh[dd] = list(reversed(entries[:HISTORY_LIMIT]))
+        except Exception as e:
+            logger.warning(f"히스토리 쿼리 실패 (빈 히스토리로 진행): {e}")
 
     finally:
         await db.close()
