@@ -407,10 +407,12 @@ async def scan_route(page, route_id: int, origin: str, destination: str,
 
 
 async def cleanup_past_dates():
-    """오늘 이전 날짜의 weekly_lowest 행을 삭제한다."""
+    """오늘 이전 날짜의 weekly_lowest 행을 삭제하고, 30일 이상 된 scan_history를 정리한다."""
     db = await get_db()
     today_str = datetime.now(KST).date().isoformat()  # "YYYY-MM-DD"
+    cutoff_str = (datetime.now(KST).date() - timedelta(days=30)).isoformat()
     try:
+        # weekly_lowest 과거 날짜 삭제
         cursor = await db.execute(
             "SELECT COUNT(*) FROM weekly_lowest WHERE depart_date < ?",
             (today_str,)
@@ -421,10 +423,24 @@ async def cleanup_past_dates():
                 "DELETE FROM weekly_lowest WHERE depart_date < ?",
                 (today_str,)
             )
-            await db.commit()
-            logger.info(f"과거 날짜 {count}건 삭제 (depart_date < {today_str})")
+            logger.info(f"weekly_lowest 과거 날짜 {count}건 삭제 (< {today_str})")
         else:
-            logger.info("삭제할 과거 날짜 없음")
+            logger.info("삭제할 weekly_lowest 과거 날짜 없음")
+
+        # scan_history 30일 이상 된 데이터 삭제
+        cursor2 = await db.execute(
+            "SELECT COUNT(*) FROM scan_history WHERE scanned_at < ?",
+            (cutoff_str,)
+        )
+        count2 = (await cursor2.fetchone())[0]
+        if count2 > 0:
+            await db.execute(
+                "DELETE FROM scan_history WHERE scanned_at < ?",
+                (cutoff_str,)
+            )
+            logger.info(f"scan_history 30일+ 데이터 {count2}건 삭제 (< {cutoff_str})")
+
+        await db.commit()
     finally:
         await db.close()
 
@@ -548,35 +564,46 @@ async def export_and_push():
             for i, r in enumerate(ROUTES)
         }
 
-        # price_history: 구간별 전체 최저가 시계열
+        HISTORY_LIMIT = 200  # data.json에 export할 최대 포인트 수 (구간별)
+
+        # price_history: 구간별 전체 최저가 시계열 — 최근 200건
         ph_rows = await db.execute(
             "SELECT route_id, snapshot_at, overall_min_price, airline, depart_date "
-            "FROM price_history ORDER BY route_id, snapshot_at"
+            "FROM price_history ORDER BY route_id, snapshot_at DESC"
         )
+        ph_by_route: dict = {}
         for row in await ph_rows.fetchall():
             key = rid_to_key.get(row["route_id"])
             if key and key in route_map:
-                route_map[key].setdefault("overall_history", []).append({
+                ph_by_route.setdefault(key, []).append({
                     "snapshot_at": row["snapshot_at"],
                     "price": row["overall_min_price"],
                     "airline": row["airline"],
                     "depart_date": row["depart_date"],
                 })
+        for key, entries in ph_by_route.items():
+            # DESC로 가져왔으므로 최근 200건 → 역순 정렬해서 오름차순으로
+            route_map[key]["overall_history"] = list(reversed(entries[:HISTORY_LIMIT]))
 
-        # weekly_price_history: 주별 최저가 시계열
+        # weekly_price_history: 주별 최저가 시계열 — depart_date별 최근 200건
         wph_rows = await db.execute(
             "SELECT route_id, depart_date, return_date, snapshot_at, min_price, airline "
-            "FROM weekly_price_history ORDER BY route_id, depart_date, snapshot_at"
+            "FROM weekly_price_history ORDER BY route_id, depart_date, snapshot_at DESC"
         )
+        wph_by_key: dict = {}
         for row in await wph_rows.fetchall():
             key = rid_to_key.get(row["route_id"])
             if key and key in route_map:
-                wh = route_map[key].setdefault("weekly_history", {})
-                wh.setdefault(row["depart_date"], []).append({
+                dd = row["depart_date"]
+                wph_by_key.setdefault(key, {}).setdefault(dd, []).append({
                     "snapshot_at": row["snapshot_at"],
                     "price": row["min_price"],
                     "airline": row["airline"],
                 })
+        for key, dd_map in wph_by_key.items():
+            wh = route_map[key].setdefault("weekly_history", {})
+            for dd, entries in dd_map.items():
+                wh[dd] = list(reversed(entries[:HISTORY_LIMIT]))
 
     finally:
         await db.close()

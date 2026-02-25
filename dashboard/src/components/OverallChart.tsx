@@ -14,7 +14,15 @@ import { formatPrice } from "@/lib/utils";
 
 function formatChartDate(isoStr: string): string {
   const d = new Date(isoStr);
-  return `${d.getMonth() + 1}/${d.getDate()} ${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Asia/Seoul",
+    month: "numeric",
+    day: "numeric",
+    hour: "2-digit",
+    hour12: false,
+  }).formatToParts(d);
+  const get = (t: string) => parts.find((p) => p.type === t)?.value ?? "0";
+  return `${get("month")}/${get("day")} ${get("hour")}시`;
 }
 
 export default function OverallChart({
