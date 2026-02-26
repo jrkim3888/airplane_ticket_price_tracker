@@ -77,7 +77,8 @@ async def get_db() -> aiosqlite.Connection:
 
 async def init_db():
     """스키마를 생성하고 routes 테이블을 초기화한다."""
-    from config import ROUTES, DEPART_TIME_FROM, RETURN_TIME_FROM
+    from config import ALL_ROUTES, DEPART_TIME_FROM, RETURN_TIME_FROM
+    ROUTES = ALL_ROUTES
 
     db = await get_db()
     try:

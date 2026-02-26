@@ -15,7 +15,7 @@ import pytz
 from playwright.async_api import async_playwright
 
 from config import (
-    ROUTES, TRIP_PATTERNS, SCAN_WEEKS, SPECIAL_DATES,
+    ROUTES, TRIP_PATTERNS, SCAN_WEEKS, SPECIAL_DATES, SPECIAL_ROUTES, ALL_ROUTES,
     NAVER_FLIGHT_URL, REQUEST_DELAY_MIN, REQUEST_DELAY_MAX, MAX_RETRIES,
     DISCORD_CHANNEL_ID, DEPART_TIME_FROM, RETURN_TIME_FROM,
 )
@@ -471,7 +471,7 @@ async def check_pax3_prices(page):
     """
     db = await get_db()
     try:
-        for i, route in enumerate(ROUTES, start=1):
+        for i, route in enumerate(ALL_ROUTES, start=1):
             origin = route["origin"]
             destination = route["destination"]
             depart_time_from = route.get("depart_time_from", DEPART_TIME_FROM)
@@ -559,10 +559,22 @@ async def main():
         )
         page = await context.new_page()
 
+        # 일반 구간 — 패턴 기반 날짜
         for i, route in enumerate(ROUTES, start=1):
             logger.info(f"구간 스캔 시작: {route['origin']}→{route['destination']} ({route['label']})")
             await scan_route(page, i, route["origin"], route["destination"], dates)
             logger.info(f"구간 스캔 완료: {route['label']}")
+
+        # 특별 구간 — 구간별 고정 날짜
+        offset = len(ROUTES)
+        for j, route in enumerate(SPECIAL_ROUTES, start=1):
+            route_id = offset + j
+            route_dates = route.get("dates", [])
+            if not route_dates:
+                continue
+            logger.info(f"특별 구간 스캔: {route['origin']}→{route['destination']} ({route['label']}, {len(route_dates)}개 날짜)")
+            await scan_route(page, route_id, route["origin"], route["destination"], route_dates)
+            logger.info(f"특별 구간 스캔 완료: {route['label']}")
 
         # 구간별 최저가 주 3인 가격 확인
         try:
@@ -638,7 +650,7 @@ async def export_and_push():
     db = await get_db()
     try:
         # ── 1. 메인 데이터: weekly_lowest (실패 시 예외 전파)
-        route_labels = {r["destination"]: r["label"] for r in ROUTES}
+        route_labels = {r["destination"]: r["label"] for r in ALL_ROUTES}
         rows = await db.execute("""
             SELECT r.origin, r.destination,
                    w.depart_date, w.return_date,
@@ -676,7 +688,7 @@ async def export_and_push():
         # ── 2. 히스토리 데이터: 실패해도 메인 데이터는 보존
         rid_to_key = {
             i + 1: f"{r['origin']}-{r['destination']}"
-            for i, r in enumerate(ROUTES)
+            for i, r in enumerate(ALL_ROUTES)
         }
         try:
             ph_rows = await db.execute(

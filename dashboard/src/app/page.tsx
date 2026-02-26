@@ -20,14 +20,16 @@ export default async function Home() {
         </p>
       </header>
 
-      {/* 구간별 섹션 */}
+      {/* 구간별 섹션 — 미래 날짜 데이터 없는 구간 자동 숨김 */}
       <div className="space-y-10">
-        {data.routes.map((route) => (
-          <RouteSection
-            key={`${route.origin}-${route.destination}`}
-            route={route}
-          />
-        ))}
+        {data.routes
+          .filter((route) => route.weeks.length > 0)
+          .map((route) => (
+            <RouteSection
+              key={`${route.origin}-${route.destination}`}
+              route={route}
+            />
+          ))}
       </div>
     </main>
   );

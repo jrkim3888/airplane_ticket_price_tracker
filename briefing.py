@@ -13,7 +13,7 @@ from collections import defaultdict
 import pytz
 from playwright.async_api import async_playwright
 
-from config import ROUTES, DISCORD_CHANNEL_ID, BRIEFING_HOURS_KST, DEPART_TIME_FROM, RETURN_TIME_FROM
+from config import ALL_ROUTES as ROUTES, DISCORD_CHANNEL_ID, BRIEFING_HOURS_KST, DEPART_TIME_FROM, RETURN_TIME_FROM
 from db import init_db, get_db, get_all_weekly_lowest, update_weekly_lowest
 from tracker import scrape_flights, parse_naver_flights
 
