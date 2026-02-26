@@ -15,6 +15,7 @@ RETURN_TIME_FROM = 16   # 오는 편: 목적지 출발 16:00 이후
 # weekday: 0=월 ~ 6=일
 TRIP_PATTERNS = [
     {"name": "금-일", "depart_weekday": 4, "return_weekday": 6},
+    {"name": "금-월", "depart_weekday": 4, "return_weekday": 0},  # 황금연휴 등 3박 패턴
 ]
 
 # 스캔 범위 (주)
