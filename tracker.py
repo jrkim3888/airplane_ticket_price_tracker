@@ -15,7 +15,7 @@ import pytz
 from playwright.async_api import async_playwright
 
 from config import (
-    ROUTES, TRIP_PATTERNS, SCAN_WEEKS,
+    ROUTES, TRIP_PATTERNS, SCAN_WEEKS, SPECIAL_DATES,
     NAVER_FLIGHT_URL, REQUEST_DELAY_MIN, REQUEST_DELAY_MAX, MAX_RETRIES,
     DISCORD_CHANNEL_ID, DEPART_TIME_FROM, RETURN_TIME_FROM,
 )
@@ -59,6 +59,14 @@ def generate_scan_dates() -> list[tuple[str, str]]:
             depart = next_depart + timedelta(weeks=week)
             ret = depart + timedelta(days=trip_length)
             dates.append((depart.strftime("%Y%m%d"), ret.strftime("%Y%m%d")))
+
+    # 특별 일정 추가 (과거 날짜 제외, 중복 제외)
+    existing = set(dates)
+    for dep, ret in SPECIAL_DATES:
+        from datetime import date
+        dep_date = date(int(dep[:4]), int(dep[4:6]), int(dep[6:]))
+        if dep_date >= today and (dep, ret) not in existing:
+            dates.append((dep, ret))
 
     return dates
 
