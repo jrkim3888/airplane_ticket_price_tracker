@@ -2,8 +2,8 @@ import { fetchFlightData } from "@/lib/data";
 import { formatDateTime } from "@/lib/utils";
 import RouteSection from "@/components/RouteSection";
 
-// Vercel ISR: 5분마다 재검증
-export const revalidate = 300;
+// 매 요청마다 최신 데이터 fetch (개인 대시보드라 트래픽 낮음)
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const data = await fetchFlightData();
