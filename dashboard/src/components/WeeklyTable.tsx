@@ -7,6 +7,7 @@ import {
   formatDate,
   parseFlightTimes,
   getNaverLink,
+  calcNights,
 } from "@/lib/utils";
 
 type SortKey = "depart_date" | "min_price" | "kal_price";
@@ -79,6 +80,7 @@ export default function WeeklyTable({ route }: { route: Route }) {
                 <SortBtn col="depart_date" label="출발일" />
               </th>
               <th className="px-3 py-2 text-left font-medium">귀국일</th>
+              <th className="px-3 py-2 text-center font-medium">박수</th>
               <th className="px-3 py-2 text-right font-medium">
                 <SortBtn col="min_price" label="최저가" />
               </th>
@@ -98,7 +100,7 @@ export default function WeeklyTable({ route }: { route: Route }) {
           <tbody>
             {sorted.length === 0 && (
               <tr>
-                <td colSpan={8} className="px-3 py-6 text-center text-gray-400">
+                <td colSpan={9} className="px-3 py-6 text-center text-gray-400">
                   예정된 항공편 없음
                 </td>
               </tr>
@@ -106,9 +108,10 @@ export default function WeeklyTable({ route }: { route: Route }) {
             {sorted.map((week) => {
               const flights = parseFlightTimes(week.flight_info);
               const isLowest = week.min_price === lowestPrice;
+              const nights = calcNights(week.depart_date, week.return_date);
               return (
                 <tr
-                  key={week.depart_date}
+                  key={`${week.depart_date}-${week.return_date}`}
                   className={
                     isLowest
                       ? "bg-amber-50 border-l-4 border-amber-400"
@@ -120,6 +123,15 @@ export default function WeeklyTable({ route }: { route: Route }) {
                   </td>
                   <td className="px-3 py-2.5 whitespace-nowrap">
                     {formatDate(week.return_date)}
+                  </td>
+                  <td className="px-3 py-2.5 text-center whitespace-nowrap">
+                    <span className={`text-xs font-medium px-1.5 py-0.5 rounded ${
+                      nights === 2
+                        ? "bg-blue-100 text-blue-700"
+                        : "bg-purple-100 text-purple-700"
+                    }`}>
+                      {nights}박
+                    </span>
                   </td>
                   <td
                     className={`px-3 py-2.5 text-right font-semibold whitespace-nowrap ${

@@ -58,3 +58,9 @@ const ORIGIN_NAMES: Record<string, string> = {
 export function getOriginName(code: string): string {
   return ORIGIN_NAMES[code] || code;
 }
+
+export function calcNights(departDate: string, returnDate: string): number {
+  const d = new Date(departDate + "T00:00:00+09:00");
+  const r = new Date(returnDate + "T00:00:00+09:00");
+  return Math.round((r.getTime() - d.getTime()) / (1000 * 60 * 60 * 24));
+}
