@@ -5,7 +5,6 @@ import {
   parseFlightTimes,
   getNaverLink,
   getOriginName,
-  calcNights,
 } from "@/lib/utils";
 
 export default function LowestPriceCard({ route }: { route: Route }) {
@@ -16,19 +15,6 @@ export default function LowestPriceCard({ route }: { route: Route }) {
   const sorted = [...futureWeeks].sort((a, b) => a.min_price - b.min_price);
 
   const best: WeekEntry | undefined = sorted[0];
-
-  // 최저가 출발일과 같은 날 다른 박수 옵션 (2박↔3박 비교)
-  const bestNights = best ? calcNights(best.depart_date, best.return_date) : 0;
-  const altOption = best
-    ? futureWeeks.find(
-        (w) =>
-          w.depart_date === best.depart_date &&
-          w.return_date !== best.return_date
-      )
-    : null;
-  const altNights = altOption
-    ? calcNights(altOption.depart_date, altOption.return_date)
-    : 0;
 
   const kalWeeks = route.weeks.filter(
     (w) => w.kal_price !== null && w.depart_date >= today
@@ -63,10 +49,7 @@ export default function LowestPriceCard({ route }: { route: Route }) {
             <div className="text-sm text-gray-600 space-y-1">
               <div>
                 📅 {formatDate(best.depart_date)} ~{" "}
-                {formatDate(best.return_date)}{" "}
-                <span className="text-xs font-medium px-1.5 py-0.5 rounded bg-blue-100 text-blue-700">
-                  {bestNights}박
-                </span>
+                {formatDate(best.return_date)}
               </div>
               <div>🛫 {best.airline}</div>
               {bestFlights && (
@@ -76,32 +59,41 @@ export default function LowestPriceCard({ route }: { route: Route }) {
                 </>
               )}
             </div>
-            {altOption && (
+            {/* 3인 가격 비교 */}
+            {"pax3_price" in best && (
               <div className="mt-3 pt-3 border-t border-amber-200">
                 <div className="text-xs text-amber-700 font-medium mb-1">
-                  같은 출발일 {altNights}박 옵션
+                  👥 3인 기준
                 </div>
-                <div className="flex items-center justify-between">
-                  <div className="text-sm text-gray-600">
-                    <span className="font-semibold text-gray-800">
-                      {formatPrice(altOption.min_price)}
-                    </span>
-                    {" · "}{altOption.airline}
-                  </div>
-                  <a
-                    href={getNaverLink(
-                      route.origin,
-                      route.destination,
-                      altOption.depart_date,
-                      altOption.return_date
-                    )}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs text-green-600 hover:text-green-800"
-                  >
-                    검색↗
-                  </a>
-                </div>
+                {best.pax3_price !== null ? (
+                  (() => {
+                    const pp = best.pax3_price as number;  // 3인 검색 시 1인당 가격
+                    const diff = pp - best.min_price;
+                    const same = diff === 0;
+                    return (
+                      <div className="text-sm text-gray-700">
+                        1인당{" "}
+                        <span className={`font-semibold ${same ? "text-green-700" : "text-red-600"}`}>
+                          {formatPrice(pp)}
+                        </span>
+                        {" "}
+                        <span className="text-gray-500">
+                          (총 {formatPrice(pp * 3)})
+                        </span>
+                        {" "}
+                        {same ? (
+                          <span className="text-xs text-green-600">✓ 동일가</span>
+                        ) : (
+                          <span className="text-xs text-red-500">
+                            1인 대비 {diff > 0 ? "+" : ""}{formatPrice(diff)}
+                          </span>
+                        )}
+                      </div>
+                    );
+                  })()
+                ) : (
+                  <div className="text-sm text-gray-400">확인 불가</div>
+                )}
               </div>
             )}
             <a

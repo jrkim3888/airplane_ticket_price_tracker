@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS weekly_lowest (
     flight_info TEXT,
     kal_price INTEGER,
     kal_flight_info TEXT,
+    pax3_price INTEGER,
     updated_at TEXT,
     FOREIGN KEY (route_id) REFERENCES routes(id)
 );
@@ -81,6 +82,15 @@ async def init_db():
     db = await get_db()
     try:
         await db.executescript(SCHEMA_SQL)
+
+        # 마이그레이션: pax3_price 컬럼 추가 (기존 DB 대응)
+        cols = await db.execute("PRAGMA table_info(weekly_lowest)")
+        col_names = [row["name"] for row in await cols.fetchall()]
+        if "pax3_price" not in col_names:
+            await db.execute(
+                "ALTER TABLE weekly_lowest ADD COLUMN pax3_price INTEGER"
+            )
+            await db.commit()
 
         for i, route in enumerate(ROUTES, start=1):
             existing = await db.execute(

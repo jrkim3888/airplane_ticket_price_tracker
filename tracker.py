@@ -71,13 +71,17 @@ def generate_scan_dates() -> list[tuple[str, str]]:
     return dates
 
 
-def build_url(origin: str, destination: str, depart_date: str, return_date: str) -> str:
-    return NAVER_FLIGHT_URL.format(
+def build_url(origin: str, destination: str, depart_date: str, return_date: str,
+              adults: int = 1) -> str:
+    url = NAVER_FLIGHT_URL.format(
         origin=origin,
         destination=destination,
         depart_date=depart_date,
         return_date=return_date,
     )
+    if adults != 1:
+        url = url.replace("adult=1", f"adult={adults}")
+    return url
 
 
 _token_result = subprocess.run(
@@ -453,6 +457,51 @@ async def cleanup_past_dates():
         await db.close()
 
 
+async def check_pax3_prices(page):
+    """구간별 전체 최저가 주를 adult=3으로 크롤링해 pax3_price를 갱신한다."""
+    db = await get_db()
+    try:
+        for i, route in enumerate(ROUTES, start=1):
+            origin = route["origin"]
+            destination = route["destination"]
+            depart_time_from = route.get("depart_time_from", DEPART_TIME_FROM)
+            return_time_from = route.get("return_time_from", RETURN_TIME_FROM)
+
+            # 해당 구간의 현재 최저가 주 조회
+            row = await db.execute(
+                "SELECT depart_date, return_date, min_price FROM weekly_lowest "
+                "WHERE route_id = ? ORDER BY min_price ASC LIMIT 1",
+                (i,)
+            )
+            best = await row.fetchone()
+            if not best:
+                continue
+
+            dep = best["depart_date"].replace("-", "")
+            ret = best["return_date"].replace("-", "")
+            url = build_url(origin, destination, dep, ret, adults=3)
+
+            logger.info(f"3인 가격 체크: {origin}→{destination} {best['depart_date']} (adult=3)")
+            result = await scrape_flights(page, url, origin, destination,
+                                         depart_time_from, return_time_from)
+            await asyncio.sleep(random.uniform(REQUEST_DELAY_MIN, REQUEST_DELAY_MAX))
+
+            pax3_price = result["min_price"] if result else None
+            await db.execute(
+                "UPDATE weekly_lowest SET pax3_price = ? "
+                "WHERE route_id = ? AND depart_date = ? AND return_date = ?",
+                (pax3_price, i, best["depart_date"], best["return_date"])
+            )
+            if pax3_price is not None:
+                logger.info(f"3인 1인당: {pax3_price:,}원 (1인: {best['min_price']:,}원)")
+            else:
+                logger.warning(f"3인 가격 조회 실패: {origin}→{destination} {best['depart_date']}")
+
+        await db.commit()
+    finally:
+        await db.close()
+
+
 async def main():
     logger.info("항공권 가격 트래커 시작")
 
@@ -484,6 +533,12 @@ async def main():
             logger.info(f"구간 스캔 시작: {route['origin']}→{route['destination']} ({route['label']})")
             await scan_route(page, i, route["origin"], route["destination"], dates)
             logger.info(f"구간 스캔 완료: {route['label']}")
+
+        # 구간별 최저가 주 3인 가격 확인
+        try:
+            await check_pax3_prices(page)
+        except Exception as e:
+            logger.error(f"3인 가격 체크 실패: {e}")
 
         await browser.close()
 
@@ -559,7 +614,7 @@ async def export_and_push():
                    w.depart_date, w.return_date,
                    w.min_price, w.airline, w.flight_info,
                    w.kal_price, w.kal_flight_info,
-                   w.updated_at
+                   w.pax3_price, w.updated_at
             FROM weekly_lowest w
             JOIN routes r ON w.route_id = r.id
             ORDER BY r.id, w.depart_date
@@ -583,6 +638,7 @@ async def export_and_push():
                 "flight_info": row["flight_info"],
                 "kal_price": row["kal_price"],
                 "kal_flight_info": row["kal_flight_info"],
+                "pax3_price": row["pax3_price"],
                 "updated_at": row["updated_at"],
             })
         data["routes"] = list(route_map.values())

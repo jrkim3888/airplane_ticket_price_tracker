@@ -6,6 +6,7 @@ export interface WeekEntry {
   flight_info: string;
   kal_price: number | null;
   kal_flight_info: string | null;
+  pax3_price: number | null;  // 3인 기준 총 가격 (adult=3 크롤링 결과)
   updated_at: string;
 }
 
