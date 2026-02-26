@@ -285,6 +285,10 @@ def parse_naver_flights(text: str, origin: str, destination: str,
     if not results:
         return None
 
+    # 특정 항공사+편 검색 모드 (pax3 체크용)
+    # target_airline이 있으면 해당 항공사 결과만 반환
+    # (함수 시그니처 변경 없이 클로저로 처리 — 아래 check_pax3_prices에서 직접 파싱 호출)
+
     # 최저가 찾기
     best = min(results, key=lambda x: x["price"])
 
@@ -297,6 +301,7 @@ def parse_naver_flights(text: str, origin: str, destination: str,
         "flight_info": best["flight_info"],
         "kal_price": kal["price"] if kal else None,
         "kal_flight_info": kal["flight_info"] if kal else None,
+        "_all_results": results,  # pax3 체크용 전체 결과
     }
 
 
@@ -458,7 +463,12 @@ async def cleanup_past_dates():
 
 
 async def check_pax3_prices(page):
-    """구간별 전체 최저가 주를 adult=3으로 크롤링해 pax3_price를 갱신한다."""
+    """구간별 전체 최저가 편(동일 항공사)을 adult=3으로 재검색해 pax3_price를 갱신한다.
+
+    - adult=3 결과에서 1인 최저가와 동일한 항공사 편을 찾아 가격 비교
+    - 해당 항공사 편이 없으면 pax3_price = -1 (3석 없음 표시)
+    - 크롤링 실패 시 pax3_price = NULL (확인 불가)
+    """
     db = await get_db()
     try:
         for i, route in enumerate(ROUTES, start=1):
@@ -467,35 +477,55 @@ async def check_pax3_prices(page):
             depart_time_from = route.get("depart_time_from", DEPART_TIME_FROM)
             return_time_from = route.get("return_time_from", RETURN_TIME_FROM)
 
-            # 해당 구간의 현재 최저가 주 조회
+            # 1인 최저가 주 (항공사 + 가격 포함)
             row = await db.execute(
-                "SELECT depart_date, return_date, min_price FROM weekly_lowest "
-                "WHERE route_id = ? ORDER BY min_price ASC LIMIT 1",
+                "SELECT depart_date, return_date, min_price, airline, flight_info "
+                "FROM weekly_lowest WHERE route_id = ? ORDER BY min_price ASC LIMIT 1",
                 (i,)
             )
             best = await row.fetchone()
             if not best:
                 continue
 
+            target_airline = best["airline"]
             dep = best["depart_date"].replace("-", "")
             ret = best["return_date"].replace("-", "")
             url = build_url(origin, destination, dep, ret, adults=3)
 
-            logger.info(f"3인 가격 체크: {origin}→{destination} {best['depart_date']} (adult=3)")
+            logger.info(
+                f"3인 가격 체크: {origin}→{destination} {best['depart_date']} "
+                f"(타겟: {target_airline}, adult=3)"
+            )
             result = await scrape_flights(page, url, origin, destination,
                                          depart_time_from, return_time_from)
             await asyncio.sleep(random.uniform(REQUEST_DELAY_MIN, REQUEST_DELAY_MAX))
 
-            pax3_price = result["min_price"] if result else None
+            if result is None:
+                # 크롤링 자체 실패 → NULL (확인 불가)
+                pax3_price = None
+                logger.warning(f"3인 크롤링 실패: {origin}→{destination} {best['depart_date']}")
+            else:
+                # adult=3 전체 결과에서 동일 항공사 편 탐색
+                all_results = result.get("_all_results", [])
+                matched = next(
+                    (r for r in all_results if r["airline"] == target_airline),
+                    None
+                )
+                if matched:
+                    pax3_price = matched["price"]  # 동일 편 3인 검색 시 1인당 가격
+                    logger.info(
+                        f"동일 편 발견: {target_airline} {pax3_price:,}원 "
+                        f"(1인: {best['min_price']:,}원)"
+                    )
+                else:
+                    pax3_price = -1  # 해당 항공사 편 자체가 3인 검색에서 없음
+                    logger.info(f"동일 편 없음 (3석 미확보): {target_airline}")
+
             await db.execute(
                 "UPDATE weekly_lowest SET pax3_price = ? "
                 "WHERE route_id = ? AND depart_date = ? AND return_date = ?",
                 (pax3_price, i, best["depart_date"], best["return_date"])
             )
-            if pax3_price is not None:
-                logger.info(f"3인 1인당: {pax3_price:,}원 (1인: {best['min_price']:,}원)")
-            else:
-                logger.warning(f"3인 가격 조회 실패: {origin}→{destination} {best['depart_date']}")
 
         await db.commit()
     finally:

@@ -65,34 +65,34 @@ export default function LowestPriceCard({ route }: { route: Route }) {
                 <div className="text-xs text-amber-700 font-medium mb-1">
                   👥 3인 기준
                 </div>
-                {best.pax3_price !== null ? (
+                {best.pax3_price === null ? (
+                  <div className="text-sm text-gray-400">확인 불가</div>
+                ) : best.pax3_price === -1 ? (
+                  <div className="text-sm font-medium text-red-600">❌ 3석 없음 (동일 편 매진)</div>
+                ) : (
                   (() => {
-                    const pp = best.pax3_price as number;  // 3인 검색 시 1인당 가격
+                    const pp = best.pax3_price as number;
                     const diff = pp - best.min_price;
                     const same = diff === 0;
                     return (
                       <div className="text-sm text-gray-700">
                         1인당{" "}
-                        <span className={`font-semibold ${same ? "text-green-700" : "text-red-600"}`}>
+                        <span className={`font-semibold ${same ? "text-green-700" : "text-orange-600"}`}>
                           {formatPrice(pp)}
                         </span>
                         {" "}
-                        <span className="text-gray-500">
-                          (총 {formatPrice(pp * 3)})
-                        </span>
+                        <span className="text-gray-500">(총 {formatPrice(pp * 3)})</span>
                         {" "}
                         {same ? (
-                          <span className="text-xs text-green-600">✓ 동일가</span>
+                          <span className="text-xs text-green-600">✓ 3석 동일가</span>
                         ) : (
-                          <span className="text-xs text-red-500">
-                            1인 대비 {diff > 0 ? "+" : ""}{formatPrice(diff)}
+                          <span className="text-xs text-orange-500">
+                            1인 대비 +{formatPrice(diff)}
                           </span>
                         )}
                       </div>
                     );
                   })()
-                ) : (
-                  <div className="text-sm text-gray-400">확인 불가</div>
                 )}
               </div>
             )}
