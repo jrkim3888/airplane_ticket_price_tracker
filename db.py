@@ -97,11 +97,19 @@ async def init_db():
             existing = await db.execute(
                 "SELECT id FROM routes WHERE id = ?", (i,)
             )
+            dep_from = route.get("depart_time_from", DEPART_TIME_FROM)
+            ret_from = route.get("return_time_from", RETURN_TIME_FROM)
             if await existing.fetchone() is None:
                 await db.execute(
                     "INSERT INTO routes (id, origin, destination, depart_time_from, return_time_from) "
                     "VALUES (?, ?, ?, ?, ?)",
-                    (i, route["origin"], route["destination"], DEPART_TIME_FROM, RETURN_TIME_FROM),
+                    (i, route["origin"], route["destination"], dep_from, ret_from),
+                )
+            else:
+                # depart_time_from/return_time_from이 config와 다르면 업데이트
+                await db.execute(
+                    "UPDATE routes SET depart_time_from=?, return_time_from=? WHERE id=?",
+                    (dep_from, ret_from, i),
                 )
         await db.commit()
     finally:
