@@ -1,5 +1,7 @@
 # DB
 flight_tracker.db
+flight_tracker.db-shm
+flight_tracker.db-wal
 
 # 디버그/테스트
 debug_*.py
