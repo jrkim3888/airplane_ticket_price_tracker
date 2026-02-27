@@ -5,6 +5,8 @@ import {
   parseFlightTimes,
   getNaverLink,
   getOriginName,
+  getFlagUrl,
+  getLabelText,
 } from "@/lib/utils";
 
 export default function LowestPriceCard({ route }: { route: Route }) {
@@ -31,8 +33,18 @@ export default function LowestPriceCard({ route }: { route: Route }) {
 
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6">
-      <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-4">
-        {getOriginName(route.origin)} → {route.label}
+      <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+        {getFlagUrl(route.label) && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={getFlagUrl(route.label)!}
+            alt=""
+            width={24}
+            height={18}
+            className="inline-block flex-shrink-0"
+          />
+        )}
+        {getOriginName(route.origin)} → {getLabelText(route.label)}
       </h2>
 
       {best ? (

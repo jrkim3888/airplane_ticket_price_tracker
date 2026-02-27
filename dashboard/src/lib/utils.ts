@@ -59,6 +59,29 @@ export function getOriginName(code: string): string {
   return ORIGIN_NAMES[code] || code;
 }
 
+// 국기 이모지(Regional Indicator 2자) → flagcdn.com URL
+// 예: "🇯🇵 후쿠오카" → "https://flagcdn.com/24x18/jp.png"
+export function getFlagUrl(label: string): string | null {
+  const codePoints = Array.from(label).map((c) => c.codePointAt(0) ?? 0);
+  const indicators: number[] = [];
+  for (const cp of codePoints) {
+    if (cp >= 0x1f1e6 && cp <= 0x1f1ff) {
+      indicators.push(cp - 0x1f1e6); // 0=A … 25=Z
+    }
+  }
+  if (indicators.length < 2) return null;
+  const code = String.fromCharCode(65 + indicators[0], 65 + indicators[1]).toLowerCase();
+  return `https://flagcdn.com/24x18/${code}.png`;
+}
+
+// 국기 이모지 + 공백 접두사 제거 → 순수 도시명
+// 예: "🇯🇵 후쿠오카" → "후쿠오카"
+export function getLabelText(label: string): string {
+  return label
+    .replace(/^[\uD83C][\uDDE6-\uDDFF][\uD83C][\uDDE6-\uDDFF]\s*/, "")
+    .trim();
+}
+
 export function calcNights(departDate: string, returnDate: string): number {
   const d = new Date(departDate + "T00:00:00+09:00");
   const r = new Date(returnDate + "T00:00:00+09:00");
