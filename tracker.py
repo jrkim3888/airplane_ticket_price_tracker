@@ -1,5 +1,6 @@
 """항공권 가격 트래커 - 크롤러 + DB 저장 + 즉시 알림"""
 
+import argparse
 import asyncio
 import random
 import re
@@ -72,10 +73,17 @@ def generate_scan_dates() -> list[tuple[str, str]]:
 
 
 def build_url(origin: str, destination: str, depart_date: str, return_date: str,
-              adults: int = 1) -> str:
+              adults: int = 1,
+              naver_origin: str | None = None, naver_dest: str | None = None) -> str:
+    """네이버 항공 검색 URL 생성.
+    naver_origin/naver_dest: URL에서 사용할 코드 (예: 'ICN:airport', 'HKT:city').
+    지정하지 않으면 origin/destination 그대로 사용.
+    """
+    o = naver_origin or origin
+    d = naver_dest or destination
     url = NAVER_FLIGHT_URL.format(
-        origin=origin,
-        destination=destination,
+        origin=o,
+        destination=d,
         depart_date=depart_date,
         return_date=return_date,
     )
@@ -215,17 +223,26 @@ def parse_naver_flights(text: str, origin: str, destination: str,
             continue
 
         depart_hour = int(lines[i][:2])
-        is_out_direct = "직항" in lines[i + 2] and "경유" not in lines[i + 2]
+        # +1일 오버나이트 경우 i+2에 +1일 줄이 끼어들 수 있으므로 i+2~i+4 범위 확인
+        is_out_direct = any(
+            "직항" in lines[i + k] and "경유" not in lines[i + k]
+            for k in range(2, 5) if i + k < len(lines)
+        )
 
         if not is_out_direct:
             i += 1
             continue
 
         # 가는 편 직항 확인. 오는 편 출발 HH:MMDEST 탐색 (다음 15줄 내)
+        # 오는 편이 +1일 오버나이트인 경우 +1일 줄이 j+2에 끼어드므로 j+2~j+4 범위 확인
         ret_start = None
         for j in range(i + 3, min(i + 18, len(lines))):
             if depart_ret_pat.match(lines[j]):
-                if j + 2 < len(lines) and "직항" in lines[j + 2] and "경유" not in lines[j + 2]:
+                is_ret_direct = any(
+                    "직항" in lines[j + k] and "경유" not in lines[j + k]
+                    for k in range(2, 5) if j + k < len(lines)
+                )
+                if is_ret_direct:
                     ret_start = j
                     break
 
@@ -328,7 +345,8 @@ async def scrape_flights(page, url: str, origin: str, destination: str,
 
 
 async def scan_route(page, route_id: int, origin: str, destination: str,
-                     dates: list[tuple[str, str]]):
+                     dates: list[tuple[str, str]],
+                     naver_origin: str | None = None, naver_dest: str | None = None):
     """한 구간의 전체 날짜를 스캔한다."""
     db = await get_db()
     try:
@@ -341,7 +359,8 @@ async def scan_route(page, route_id: int, origin: str, destination: str,
         return_time_from = route_row[1] if isinstance(route_row, tuple) else route_row["return_time_from"]
 
         for depart_date, return_date in dates:
-            url = build_url(origin, destination, depart_date, return_date)
+            url = build_url(origin, destination, depart_date, return_date,
+                            naver_origin=naver_origin, naver_dest=naver_dest)
             dd_fmt = f"{depart_date[:4]}-{depart_date[4:6]}-{depart_date[6:]}"
             rd_fmt = f"{return_date[:4]}-{return_date[4:6]}-{return_date[6:]}"
             logger.info(f"스캔: {origin}→{destination} {dd_fmt} ~ {rd_fmt}")
@@ -532,8 +551,8 @@ async def check_pax3_prices(page):
         await db.close()
 
 
-async def main():
-    logger.info("항공권 가격 트래커 시작")
+async def main(special_only: bool = False):
+    logger.info("항공권 가격 트래커 시작" + (" (특별 구간 전용)" if special_only else ""))
 
     await init_db()
     await cleanup_past_dates()
@@ -560,10 +579,11 @@ async def main():
         page = await context.new_page()
 
         # 일반 구간 — 패턴 기반 날짜
-        for i, route in enumerate(ROUTES, start=1):
-            logger.info(f"구간 스캔 시작: {route['origin']}→{route['destination']} ({route['label']})")
-            await scan_route(page, i, route["origin"], route["destination"], dates)
-            logger.info(f"구간 스캔 완료: {route['label']}")
+        if not special_only:
+            for i, route in enumerate(ROUTES, start=1):
+                logger.info(f"구간 스캔 시작: {route['origin']}→{route['destination']} ({route['label']})")
+                await scan_route(page, i, route["origin"], route["destination"], dates)
+                logger.info(f"구간 스캔 완료: {route['label']}")
 
         # 특별 구간 — 구간별 고정 날짜
         offset = len(ROUTES)
@@ -572,8 +592,11 @@ async def main():
             route_dates = route.get("dates", [])
             if not route_dates:
                 continue
+            naver_origin = route.get("naver_origin")
+            naver_dest = route.get("naver_dest")
             logger.info(f"특별 구간 스캔: {route['origin']}→{route['destination']} ({route['label']}, {len(route_dates)}개 날짜)")
-            await scan_route(page, route_id, route["origin"], route["destination"], route_dates)
+            await scan_route(page, route_id, route["origin"], route["destination"], route_dates,
+                             naver_origin=naver_origin, naver_dest=naver_dest)
             logger.info(f"특별 구간 스캔 완료: {route['label']}")
 
         # 구간별 최저가 주 3인 가격 확인
@@ -760,4 +783,10 @@ async def export_and_push():
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    parser = argparse.ArgumentParser(description="항공권 가격 트래커")
+    parser.add_argument(
+        "--special-only", action="store_true",
+        help="SPECIAL_ROUTES만 스캔 (일반 구간 생략)"
+    )
+    args = parser.parse_args()
+    asyncio.run(main(special_only=args.special_only))

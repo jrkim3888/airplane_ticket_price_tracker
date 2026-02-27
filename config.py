@@ -28,17 +28,20 @@ SPECIAL_ROUTES = [
     {
         "origin": "ICN", "destination": "DPS", "label": "발리",
         "depart_time_from": 0, "return_time_from": 0,
-        "dates": [("20260502", "20260505")],
+        "dates": [("20260501", "20260505")],
+        "naver_origin": "ICN:airport", "naver_dest": "DPS:airport",
     },
     {
         "origin": "ICN", "destination": "PQC", "label": "푸꾸옥",
         "depart_time_from": 0, "return_time_from": 0,
-        "dates": [("20260502", "20260505")],
+        "dates": [("20260501", "20260505")],
+        # PQC는 기본 코드로 정상 동작 중
     },
     {
         "origin": "ICN", "destination": "HKT", "label": "푸켓",
         "depart_time_from": 0, "return_time_from": 0,
-        "dates": [("20260502", "20260505")],
+        "dates": [("20260501", "20260505")],
+        "naver_origin": "ICN:airport", "naver_dest": "HKT:city",
     },
 ]
 
