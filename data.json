@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-02-27T13:15:25.010100+09:00",
+  "updated_at": "2026-02-27T13:19:47.396626+09:00",
   "routes": [
     {
       "origin": "ICN",
@@ -135,7 +135,7 @@
           "flight_info": "18:05 ICN→FUK 19:30 / 20:30 FUK→ICN 22:00",
           "kal_price": 408700,
           "kal_flight_info": "18:35 ICN→FUK 20:00 / 21:05 FUK→ICN 22:35",
-          "pax3_price": 305100,
+          "pax3_price": null,
           "updated_at": "2026-02-27T12:16:28.443910+09:00"
         },
         {
@@ -425,6 +425,12 @@
         },
         {
           "snapshot_at": "2026-02-27T13:15:25.003660+09:00",
+          "price": 302700,
+          "airline": "티웨이항공",
+          "depart_date": "2026-05-08"
+        },
+        {
+          "snapshot_at": "2026-02-27T13:19:47.387852+09:00",
           "price": 302700,
           "airline": "티웨이항공",
           "depart_date": "2026-05-08"
@@ -3371,6 +3377,12 @@
           "price": 308665,
           "airline": "아시아나항공",
           "depart_date": "2026-05-29"
+        },
+        {
+          "snapshot_at": "2026-02-27T13:19:47.387852+09:00",
+          "price": 308665,
+          "airline": "아시아나항공",
+          "depart_date": "2026-05-29"
         }
       ],
       "weekly_history": {
@@ -5030,6 +5042,12 @@
         },
         {
           "snapshot_at": "2026-02-27T13:15:25.003660+09:00",
+          "price": 485500,
+          "airline": "전일본공수",
+          "depart_date": "2026-05-08"
+        },
+        {
+          "snapshot_at": "2026-02-27T13:19:47.387852+09:00",
           "price": 485500,
           "airline": "전일본공수",
           "depart_date": "2026-05-08"
@@ -7757,19 +7775,67 @@
     },
     {
       "origin": "ICN",
+      "destination": "DPS",
+      "label": "발리",
+      "weeks": [
+        {
+          "depart_date": "2026-05-01",
+          "return_date": "2026-05-05",
+          "min_price": 977200,
+          "airline": "제주항공",
+          "flight_info": "15:40 ICN→DPS 21:45 / 22:45 DPS→ICN 07:15",
+          "kal_price": null,
+          "kal_flight_info": null,
+          "pax3_price": null,
+          "updated_at": "2026-02-27T13:18:14.747340+09:00"
+        }
+      ],
+      "overall_history": [
+        {
+          "snapshot_at": "2026-02-27T10:15:11.368103+09:00",
+          "price": 1108100,
+          "airline": "대한항공",
+          "depart_date": "2026-05-02"
+        },
+        {
+          "snapshot_at": "2026-02-27T13:19:47.387852+09:00",
+          "price": 977200,
+          "airline": "제주항공",
+          "depart_date": "2026-05-01"
+        }
+      ],
+      "weekly_history": {
+        "2026-05-01": [
+          {
+            "snapshot_at": "2026-02-27T13:19:47.387852+09:00",
+            "price": 977200,
+            "airline": "제주항공"
+          }
+        ],
+        "2026-05-02": [
+          {
+            "snapshot_at": "2026-02-27T10:15:11.368103+09:00",
+            "price": 1108100,
+            "airline": "대한항공"
+          }
+        ]
+      }
+    },
+    {
+      "origin": "ICN",
       "destination": "PQC",
       "label": "푸꾸옥",
       "weeks": [
         {
           "depart_date": "2026-05-01",
           "return_date": "2026-05-05",
-          "min_price": 923100,
-          "airline": "이스타항공",
-          "flight_info": "19:30 ICN→PQC 23:20 / 00:20 PQC→ICN 08:15",
+          "min_price": 884281,
+          "airline": "비엣젯항공",
+          "flight_info": "04:00 ICN→PQC +1일 / 20:35 PQC→ICN 04:00",
           "kal_price": null,
           "kal_flight_info": null,
-          "pax3_price": null,
-          "updated_at": "2026-02-27T12:57:00.355994+09:00"
+          "pax3_price": 1007200,
+          "updated_at": "2026-02-27T13:18:27.682801+09:00"
         }
       ],
       "overall_history": [
@@ -7868,6 +7934,12 @@
           "price": 923100,
           "airline": "이스타항공",
           "depart_date": "2026-05-01"
+        },
+        {
+          "snapshot_at": "2026-02-27T13:19:47.387852+09:00",
+          "price": 884281,
+          "airline": "비엣젯항공",
+          "depart_date": "2026-05-01"
         }
       ],
       "weekly_history": {
@@ -7881,6 +7953,11 @@
             "snapshot_at": "2026-02-27T13:10:52.444594+09:00",
             "price": 923100,
             "airline": "이스타항공"
+          },
+          {
+            "snapshot_at": "2026-02-27T13:19:47.387852+09:00",
+            "price": 884281,
+            "airline": "비엣젯항공"
           }
         ],
         "2026-05-02": [
@@ -7938,6 +8015,41 @@
             "snapshot_at": "2026-02-27T12:13:57.637521+09:00",
             "price": 666200,
             "airline": "티웨이항공"
+          }
+        ]
+      }
+    },
+    {
+      "origin": "ICN",
+      "destination": "HKT",
+      "label": "푸켓",
+      "weeks": [
+        {
+          "depart_date": "2026-05-01",
+          "return_date": "2026-05-05",
+          "min_price": 659900,
+          "airline": "아시아나항공",
+          "flight_info": "16:30 ICN→HKT 20:55 / 22:15 HKT→ICN 06:35",
+          "kal_price": 734100,
+          "kal_flight_info": "17:50 ICN→HKT 22:10 / 23:25 HKT→ICN 07:35",
+          "pax3_price": null,
+          "updated_at": "2026-02-27T13:18:41.005585+09:00"
+        }
+      ],
+      "overall_history": [
+        {
+          "snapshot_at": "2026-02-27T13:19:47.387852+09:00",
+          "price": 659900,
+          "airline": "아시아나항공",
+          "depart_date": "2026-05-01"
+        }
+      ],
+      "weekly_history": {
+        "2026-05-01": [
+          {
+            "snapshot_at": "2026-02-27T13:19:47.387852+09:00",
+            "price": 659900,
+            "airline": "아시아나항공"
           }
         ]
       }
