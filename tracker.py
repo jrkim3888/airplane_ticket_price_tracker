@@ -31,7 +31,7 @@ logger = logging.getLogger(__name__)
 
 KST = pytz.timezone("Asia/Seoul")
 
-DESTINATION_LABELS = {r["destination"]: r["label"] for r in ROUTES}
+DESTINATION_LABELS = {r["destination"]: r["label"] for r in ALL_ROUTES}
 
 
 def generate_scan_dates() -> list[tuple[str, str]]:

@@ -2,9 +2,9 @@
 
 # 추적 구간 (Routes)
 ROUTES = [
-    {"origin": "ICN", "destination": "FUK", "label": "후쿠오카"},
-    {"origin": "ICN", "destination": "NRT", "label": "도쿄 나리타"},
-    {"origin": "GMP", "destination": "HND", "label": "도쿄 하네다"},
+    {"origin": "ICN", "destination": "FUK", "label": "🇯🇵 후쿠오카"},
+    {"origin": "ICN", "destination": "NRT", "label": "🇯🇵 도쿄 나리타"},
+    {"origin": "GMP", "destination": "HND", "label": "🇯🇵 도쿄 하네다"},
 ]
 
 # 시간 조건
@@ -26,19 +26,19 @@ SPECIAL_DATES = [
 # 만료 후 weekly_lowest가 비면 대시보드에서 자동으로 사라짐 (B안)
 SPECIAL_ROUTES = [
     {
-        "origin": "ICN", "destination": "DPS", "label": "발리",
+        "origin": "ICN", "destination": "DPS", "label": "🇮🇩 발리",
         "depart_time_from": 0, "return_time_from": 0,
         "dates": [("20260501", "20260505")],
         "naver_origin": "ICN:airport", "naver_dest": "DPS:airport",
     },
     {
-        "origin": "ICN", "destination": "PQC", "label": "푸꾸옥",
+        "origin": "ICN", "destination": "PQC", "label": "🇻🇳 푸꾸옥",
         "depart_time_from": 0, "return_time_from": 0,
         "dates": [("20260501", "20260505")],
         # PQC는 기본 코드로 정상 동작 중
     },
     {
-        "origin": "ICN", "destination": "HKT", "label": "푸켓",
+        "origin": "ICN", "destination": "HKT", "label": "🇹🇭 푸켓",
         "depart_time_from": 0, "return_time_from": 0,
         "dates": [("20260501", "20260505")],
         "naver_origin": "ICN:airport", "naver_dest": "HKT:city",
