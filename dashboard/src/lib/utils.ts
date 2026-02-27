@@ -1,7 +1,8 @@
 const DAY_NAMES = ["일", "월", "화", "수", "목", "금", "토"];
 
 export function formatDate(dateStr: string): string {
-  const d = new Date(dateStr + "T00:00:00+09:00");
+  // T12:00:00+09:00 → UTC 03:00, safe for any server timezone (avoids midnight UTC rollback)
+  const d = new Date(dateStr + "T12:00:00+09:00");
   const month = String(d.getMonth() + 1).padStart(2, "0");
   const day = String(d.getDate()).padStart(2, "0");
   const dayName = DAY_NAMES[d.getDay()];
