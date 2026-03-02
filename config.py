@@ -64,6 +64,11 @@ REQUEST_DELAY_MIN = 2
 REQUEST_DELAY_MAX = 5
 MAX_RETRIES = 1
 
+# Playwright 실행 모드
+# - False: headed(브라우저 창 표시)
+# - True: headless(백그라운드 안정성 ↑)
+HEADLESS = False
+
 # Discord 채널
 DISCORD_CHANNEL_ID = "1470680847152840809"
 

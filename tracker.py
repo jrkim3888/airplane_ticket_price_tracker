@@ -18,7 +18,7 @@ from playwright.async_api import async_playwright
 from config import (
     ROUTES, TRIP_PATTERNS, SCAN_WEEKS, SPECIAL_DATES, SPECIAL_ROUTES, ALL_ROUTES,
     NAVER_FLIGHT_URL, REQUEST_DELAY_MIN, REQUEST_DELAY_MAX, MAX_RETRIES,
-    DISCORD_CHANNEL_ID, DEPART_TIME_FROM, RETURN_TIME_FROM,
+    DISCORD_CHANNEL_ID, DEPART_TIME_FROM, RETURN_TIME_FROM, HEADLESS,
 )
 from db import (init_db, get_db, insert_scan, update_weekly_lowest,
                 insert_price_snapshot, insert_weekly_price_snapshot)
@@ -581,8 +581,15 @@ async def check_pax3_prices(page):
         await db.close()
 
 
-async def main(special_only: bool = False):
-    logger.info("항공권 가격 트래커 시작" + (" (특별 구간 전용)" if special_only else ""))
+async def main(special_only: bool = False, headless: bool | None = None):
+    if headless is None:
+        headless = HEADLESS
+    mode = "headless" if headless else "headed"
+    logger.info(
+        "항공권 가격 트래커 시작"
+        + (" (특별 구간 전용)" if special_only else "")
+        + f" [{mode}]"
+    )
 
     await init_db()
     await cleanup_past_dates()
@@ -591,7 +598,7 @@ async def main(special_only: bool = False):
 
     async with async_playwright() as p:
         browser = await p.chromium.launch(
-            headless=False,
+            headless=headless,
             args=["--no-sandbox", "--disable-blink-features=AutomationControlled"]
         )
         context = await browser.new_context(
@@ -818,5 +825,21 @@ if __name__ == "__main__":
         "--special-only", action="store_true",
         help="SPECIAL_ROUTES만 스캔 (일반 구간 생략)"
     )
+    mode_group = parser.add_mutually_exclusive_group()
+    mode_group.add_argument(
+        "--headless", action="store_true",
+        help="브라우저를 headless 모드로 실행 (config.HEADLESS보다 우선)"
+    )
+    mode_group.add_argument(
+        "--headed", action="store_true",
+        help="브라우저를 headed 모드로 실행 (config.HEADLESS보다 우선)"
+    )
+
     args = parser.parse_args()
-    asyncio.run(main(special_only=args.special_only))
+    headless_override = None
+    if args.headless:
+        headless_override = True
+    elif args.headed:
+        headless_override = False
+
+    asyncio.run(main(special_only=args.special_only, headless=headless_override))
