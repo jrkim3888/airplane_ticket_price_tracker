@@ -322,6 +322,11 @@ def parse_naver_flights(text: str, origin: str, destination: str,
     }
 
 
+class BrowserCrashError(Exception):
+    """Playwright 브라우저가 비정상 종료된 경우 발생 — 데이터 삭제 방지용."""
+    pass
+
+
 async def scrape_flights(page, url: str, origin: str, destination: str,
                          depart_time_from: int, return_time_from: int) -> dict | None:
     """네이버 항공권 페이지에서 항공편 정보를 크롤링한다."""
@@ -340,6 +345,15 @@ async def scrape_flights(page, url: str, origin: str, destination: str,
         return parse_naver_flights(text, origin, destination, depart_time_from, return_time_from)
 
     except Exception as e:
+        err_str = str(e)
+        # 브라우저 크래시 감지 — 이 경우 데이터를 삭제하면 안 됨
+        if any(kw in err_str for kw in [
+            "Target page, context or browser has been closed",
+            "Browser has been closed",
+            "browser has been disconnected",
+            "Connection closed",
+        ]):
+            raise BrowserCrashError(err_str)
         logger.error(f"크롤링 오류 ({url}): {e}")
         return None
 
@@ -366,16 +380,28 @@ async def scan_route(page, route_id: int, origin: str, destination: str,
             logger.info(f"스캔: {origin}→{destination} {dd_fmt} ~ {rd_fmt}")
 
             result = None
+            browser_crashed = False
             for attempt in range(MAX_RETRIES + 1):
-                result = await scrape_flights(
-                    page, url, origin, destination,
-                    depart_time_from, return_time_from,
-                )
+                try:
+                    result = await scrape_flights(
+                        page, url, origin, destination,
+                        depart_time_from, return_time_from,
+                    )
+                except BrowserCrashError as e:
+                    logger.error(f"브라우저 크래시 감지 ({origin}→{destination} {dd_fmt}): {e}")
+                    browser_crashed = True
+                    break
                 if result is not None:
                     break
                 if attempt < MAX_RETRIES:
                     logger.info(f"재시도 ({attempt + 1}/{MAX_RETRIES})")
                     await asyncio.sleep(2)
+
+            if browser_crashed:
+                # 브라우저 크래시 시 데이터 삭제하지 않고 스킵
+                logger.warning(f"브라우저 크래시로 스캔 스킵 (데이터 보존): {origin}→{destination} {dd_fmt}")
+                await asyncio.sleep(random.uniform(REQUEST_DELAY_MIN, REQUEST_DELAY_MAX))
+                continue
 
             if result is None:
                 logger.warning(f"결과 없음: {origin}→{destination} {dd_fmt}")
@@ -515,8 +541,12 @@ async def check_pax3_prices(page):
                 f"3인 가격 체크: {origin}→{destination} {best['depart_date']} "
                 f"(타겟: {target_airline}, adult=3)"
             )
-            result = await scrape_flights(page, url, origin, destination,
-                                         depart_time_from, return_time_from)
+            try:
+                result = await scrape_flights(page, url, origin, destination,
+                                             depart_time_from, return_time_from)
+            except BrowserCrashError as e:
+                logger.error(f"3인 체크 브라우저 크래시: {origin}→{destination} — {e}")
+                result = None
             await asyncio.sleep(random.uniform(REQUEST_DELAY_MIN, REQUEST_DELAY_MAX))
 
             if result is None:
