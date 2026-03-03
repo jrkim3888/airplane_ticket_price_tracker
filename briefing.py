@@ -36,31 +36,96 @@ WEEKDAYS_KR = ["월", "화", "수", "목", "금", "토", "일"]
 
 # ── Discord 전송 ──────────────────────────────────────────
 
-def send_discord(message: str):
+DISCORD_MAX_CONTENT = 2000
+DISCORD_SAFE_CONTENT = 1800
+
+
+def split_discord_message(message: str, max_len: int = DISCORD_SAFE_CONTENT) -> list[str]:
+    """Discord 본문 길이 제한(2000자) 이하로 안전하게 분할한다."""
+    if len(message) <= max_len:
+        return [message]
+
+    chunks = []
+    current = []
+    current_len = 0
+
+    for line in message.split("\n"):
+        # +1은 줄바꿈 문자
+        line_len = len(line) + 1
+
+        # 단일 라인이 너무 긴 경우 강제 분할
+        if line_len > max_len:
+            if current:
+                chunks.append("\n".join(current).rstrip())
+                current = []
+                current_len = 0
+
+            raw = line
+            while len(raw) > max_len:
+                chunks.append(raw[:max_len])
+                raw = raw[max_len:]
+
+            if raw:
+                current = [raw]
+                current_len = len(raw) + 1
+            continue
+
+        if current_len + line_len > max_len and current:
+            chunks.append("\n".join(current).rstrip())
+            current = [line]
+            current_len = line_len
+        else:
+            current.append(line)
+            current_len += line_len
+
+    if current:
+        chunks.append("\n".join(current).rstrip())
+
+    return chunks
+
+
+def send_discord(message: str) -> bool:
     url = f"https://discord.com/api/v10/channels/{DISCORD_CHANNEL_ID}/messages"
-    payload = json.dumps({"content": message}).encode("utf-8")
-    req = urllib.request.Request(
-        url, data=payload,
-        headers={
-            "Authorization": f"Bot {DISCORD_BOT_TOKEN}",
-            "Content-Type": "application/json",
-            "User-Agent": "mc-mini-flight-tracker/1.0",
-        },
-        method="POST",
-    )
+
     ssl_ctx = ssl.create_default_context()
     ssl_ctx.check_hostname = False
     ssl_ctx.verify_mode = ssl.CERT_NONE
-    try:
-        with urllib.request.urlopen(req, timeout=30, context=ssl_ctx) as resp:
-            if resp.status in (200, 201):
-                logger.info("Discord 브리핑 전송 완료")
-            else:
-                logger.error(f"Discord 전송 실패: HTTP {resp.status}")
-    except urllib.error.HTTPError as e:
-        logger.error(f"Discord 전송 실패: HTTP {e.code} {e.read().decode()}")
-    except Exception as e:
-        logger.error(f"Discord 전송 실패: {e}")
+
+    chunks = split_discord_message(message)
+    logger.info(f"Discord 전송 분할: {len(chunks)}개 메시지")
+
+    for idx, chunk in enumerate(chunks, start=1):
+        if len(chunk) > DISCORD_MAX_CONTENT:
+            logger.error(f"Discord 전송 실패: chunk 길이 초과 ({len(chunk)})")
+            return False
+
+        payload = json.dumps({"content": chunk}).encode("utf-8")
+        req = urllib.request.Request(
+            url,
+            data=payload,
+            headers={
+                "Authorization": f"Bot {DISCORD_BOT_TOKEN}",
+                "Content-Type": "application/json",
+                "User-Agent": "mc-mini-flight-tracker/1.0",
+            },
+            method="POST",
+        )
+
+        try:
+            with urllib.request.urlopen(req, timeout=30, context=ssl_ctx) as resp:
+                if resp.status in (200, 201):
+                    logger.info(f"Discord 브리핑 전송 완료 ({idx}/{len(chunks)})")
+                else:
+                    logger.error(f"Discord 전송 실패 ({idx}/{len(chunks)}): HTTP {resp.status}")
+                    return False
+        except urllib.error.HTTPError as e:
+            logger.error(f"Discord 전송 실패 ({idx}/{len(chunks)}): HTTP {e.code} {e.read().decode()}")
+            return False
+        except Exception as e:
+            logger.error(f"Discord 전송 실패 ({idx}/{len(chunks)}): {e}")
+            return False
+
+    return True
 
 
 # ── 포맷 헬퍼 ────────────────────────────────────────────
@@ -297,8 +362,10 @@ async def main():
             await browser.close()
 
         message = build_briefing_message(verified_data)
-        logger.info(f"브리핑 메시지:\n{message}")
-        send_discord(message)
+        logger.info(f"브리핑 메시지 길이: {len(message)}")
+        ok = send_discord(message)
+        if not ok:
+            logger.error("브리핑 전송 중 오류 발생")
 
     finally:
         await db.close()
