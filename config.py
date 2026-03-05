@@ -73,7 +73,7 @@ NAVER_FLIGHT_URL = (
 # 봇 대응
 REQUEST_DELAY_MIN = 2
 REQUEST_DELAY_MAX = 5
-MAX_RETRIES = 1
+MAX_RETRIES = 2
 
 # Playwright 실행 모드
 # - False: headed(브라우저 창 표시)
