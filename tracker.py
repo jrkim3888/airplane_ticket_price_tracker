@@ -92,11 +92,20 @@ def build_url(origin: str, destination: str, depart_date: str, return_date: str,
     return url
 
 
-_token_result = subprocess.run(
-    ["openclaw", "config", "get", "channels.discord.token"],
-    capture_output=True, text=True
-)
-DISCORD_BOT_TOKEN = _token_result.stdout.strip()
+def load_discord_bot_token() -> str:
+    """openclaw config get은 민감값을 redacted 할 수 있어 설정 파일에서 직접 읽는다."""
+    try:
+        with open("/Users/yeon/.openclaw/openclaw.json", "r", encoding="utf-8") as f:
+            cfg = _json.load(f)
+        token = cfg["channels"]["discord"]["token"].strip()
+        if not token:
+            raise ValueError("Discord token is empty")
+        return token
+    except Exception as e:
+        raise RuntimeError(f"Discord token 로드 실패: {e}")
+
+
+DISCORD_BOT_TOKEN = load_discord_bot_token()
 
 
 def send_discord(message: str):

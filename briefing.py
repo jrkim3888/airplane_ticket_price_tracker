@@ -18,11 +18,21 @@ from db import init_db, get_db, get_all_weekly_lowest, update_weekly_lowest
 from tracker import scrape_flights, parse_naver_flights
 
 # Discord 봇 토큰
-_token_result = _sp.run(
-    ["openclaw", "config", "get", "channels.discord.token"],
-    capture_output=True, text=True
-)
-DISCORD_BOT_TOKEN = _token_result.stdout.strip()
+
+def load_discord_bot_token() -> str:
+    """openclaw config get은 민감값을 redacted 할 수 있어 설정 파일에서 직접 읽는다."""
+    try:
+        with open("/Users/yeon/.openclaw/openclaw.json", "r", encoding="utf-8") as f:
+            cfg = json.load(f)
+        token = cfg["channels"]["discord"]["token"].strip()
+        if not token:
+            raise ValueError("Discord token is empty")
+        return token
+    except Exception as e:
+        raise RuntimeError(f"Discord token 로드 실패: {e}")
+
+
+DISCORD_BOT_TOKEN = load_discord_bot_token()
 
 logging.basicConfig(
     level=logging.INFO,
