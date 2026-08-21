@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-21T23:28:31.126867+09:00",
+  "updated_at": "2026-08-22T00:28:05.613302+09:00",
   "routes": [
     {
       "origin": "ICN",
@@ -7,26 +7,15 @@
       "label": "🇯🇵 후쿠오카",
       "weeks": [
         {
-          "depart_date": "2026-08-21",
-          "return_date": "2026-08-23",
-          "min_price": 252600,
-          "airline": "이스타항공",
-          "flight_info": "18:20 ICN→FUK 19:40 / 21:00 FUK→ICN 22:30",
-          "kal_price": 490900,
-          "kal_flight_info": "18:35 ICN→FUK 20:00 / 19:40 FUK→ICN 21:00",
-          "pax3_price": null,
-          "updated_at": "2026-08-21T23:11:23.877340+09:00"
-        },
-        {
           "depart_date": "2026-08-28",
           "return_date": "2026-08-30",
           "min_price": 234396,
           "airline": "티웨이항공",
           "flight_info": "18:05 ICN→FUK 19:30 / 20:30 FUK→ICN 22:00",
-          "kal_price": 409900,
+          "kal_price": 370600,
           "kal_flight_info": "18:35 ICN→FUK 20:00 / 19:40 FUK→ICN 21:00",
-          "pax3_price": 273100,
-          "updated_at": "2026-08-21T23:11:29.505768+09:00"
+          "pax3_price": 266470,
+          "updated_at": "2026-08-22T00:11:26.154421+09:00"
         },
         {
           "depart_date": "2026-09-04",
@@ -34,10 +23,10 @@
           "min_price": 271400,
           "airline": "이스타항공",
           "flight_info": "18:30 ICN→FUK 20:00 / 21:00 FUK→ICN 22:30",
-          "kal_price": 391300,
+          "kal_price": 473100,
           "kal_flight_info": "18:35 ICN→FUK 20:00 / 20:00 FUK→ICN 21:35",
           "pax3_price": null,
-          "updated_at": "2026-08-21T23:11:35.083794+09:00"
+          "updated_at": "2026-08-22T00:11:37.739995+09:00"
         },
         {
           "depart_date": "2026-09-11",
@@ -48,7 +37,7 @@
           "kal_price": 431800,
           "kal_flight_info": "18:35 ICN→FUK 20:00 / 21:05 FUK→ICN 22:35",
           "pax3_price": null,
-          "updated_at": "2026-08-21T23:11:42.156184+09:00"
+          "updated_at": "2026-08-22T00:11:44.736513+09:00"
         },
         {
           "depart_date": "2026-09-18",
@@ -59,7 +48,18 @@
           "kal_price": 431800,
           "kal_flight_info": "18:35 ICN→FUK 20:00 / 21:05 FUK→ICN 22:35",
           "pax3_price": null,
-          "updated_at": "2026-08-21T23:11:48.435727+09:00"
+          "updated_at": "2026-08-22T00:11:50.368380+09:00"
+        },
+        {
+          "depart_date": "2026-09-25",
+          "return_date": "2026-09-27",
+          "min_price": 399600,
+          "airline": "티웨이항공",
+          "flight_info": "18:05 ICN→FUK 19:30 / 20:30 FUK→ICN 22:00",
+          "kal_price": null,
+          "kal_flight_info": null,
+          "pax3_price": null,
+          "updated_at": "2026-08-22T00:11:57.292837+09:00"
         },
         {
           "depart_date": "2026-10-02",
@@ -71,6 +71,17 @@
           "kal_flight_info": "18:35 ICN→FUK 20:00 / 21:05 FUK→ICN 22:35",
           "pax3_price": null,
           "updated_at": "2026-08-21T22:12:11.158882+09:00"
+        },
+        {
+          "depart_date": "2026-10-09",
+          "return_date": "2026-10-11",
+          "min_price": 691300,
+          "airline": "아시아나항공",
+          "flight_info": "18:35 ICN→FUK 20:00 / 16:25 FUK→ICN 18:05",
+          "kal_price": null,
+          "kal_flight_info": null,
+          "pax3_price": null,
+          "updated_at": "2026-08-22T00:12:10.657500+09:00"
         },
         {
           "depart_date": "2026-10-16",
@@ -125,7 +136,7 @@
           "kal_price": 502300,
           "kal_flight_info": "18:40 ICN→FUK 20:05 / 21:05 FUK→ICN 22:35",
           "pax3_price": null,
-          "updated_at": "2026-08-21T23:12:53.285752+09:00"
+          "updated_at": "2026-08-22T00:12:46.174501+09:00"
         },
         {
           "depart_date": "2026-11-20",
@@ -144,10 +155,10 @@
           "min_price": 396300,
           "airline": "이스타항공",
           "flight_info": "18:15 ICN→FUK 19:35 / 20:35 FUK→ICN 22:00",
-          "kal_price": 493300,
+          "kal_price": 519400,
           "kal_flight_info": "18:40 ICN→FUK 20:05 / 21:05 FUK→ICN 22:35",
           "pax3_price": null,
-          "updated_at": "2026-08-21T23:13:06.986543+09:00"
+          "updated_at": "2026-08-22T00:13:00.575798+09:00"
         },
         {
           "depart_date": "2026-12-04",
@@ -158,16 +169,21 @@
           "kal_price": 493300,
           "kal_flight_info": "18:40 ICN→FUK 20:05 / 21:05 FUK→ICN 22:35",
           "pax3_price": null,
-          "updated_at": "2026-08-21T23:13:21.967117+09:00"
+          "updated_at": "2026-08-22T00:13:08.302843+09:00"
+        },
+        {
+          "depart_date": "2026-12-11",
+          "return_date": "2026-12-13",
+          "min_price": 423000,
+          "airline": "이스타항공",
+          "flight_info": "18:15 ICN→FUK 19:35 / 20:35 FUK→ICN 22:00",
+          "kal_price": null,
+          "kal_flight_info": null,
+          "pax3_price": null,
+          "updated_at": "2026-08-22T00:13:13.999303+09:00"
         }
       ],
       "overall_history": [
-        {
-          "snapshot_at": "2026-08-13T16:30:10.002487+09:00",
-          "price": 246112,
-          "airline": "티웨이항공",
-          "depart_date": "2026-08-21"
-        },
         {
           "snapshot_at": "2026-08-13T17:28:29.624445+09:00",
           "price": 237000,
@@ -1358,6 +1374,12 @@
         },
         {
           "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
+          "price": 234396,
+          "airline": "티웨이항공",
+          "depart_date": "2026-08-28"
+        },
+        {
+          "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
           "price": 234396,
           "airline": "티웨이항공",
           "depart_date": "2026-08-28"
@@ -26687,11 +26709,6 @@
         ],
         "2026-08-28": [
           {
-            "snapshot_at": "2026-08-13T15:27:57.517386+09:00",
-            "price": 233687,
-            "airline": "티웨이항공"
-          },
-          {
             "snapshot_at": "2026-08-13T17:28:29.624445+09:00",
             "price": 237000,
             "airline": "티웨이항공"
@@ -27683,17 +27700,17 @@
           },
           {
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
+            "price": 234396,
+            "airline": "티웨이항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
             "price": 234396,
             "airline": "티웨이항공"
           }
         ],
         "2026-09-04": [
           {
-            "snapshot_at": "2026-08-13T14:28:45.221140+09:00",
-            "price": 299040,
-            "airline": "제주항공"
-          },
-          {
             "snapshot_at": "2026-08-13T15:27:57.517386+09:00",
             "price": 299040,
             "airline": "제주항공"
@@ -28685,17 +28702,17 @@
           },
           {
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
+            "price": 271400,
+            "airline": "이스타항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
             "price": 271400,
             "airline": "이스타항공"
           }
         ],
         "2026-09-11": [
           {
-            "snapshot_at": "2026-08-13T16:30:10.002487+09:00",
-            "price": 279900,
-            "airline": "제주항공"
-          },
-          {
             "snapshot_at": "2026-08-13T17:28:29.624445+09:00",
             "price": 279900,
             "airline": "제주항공"
@@ -29687,17 +29704,17 @@
           },
           {
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
+            "price": 279900,
+            "airline": "제주항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
             "price": 279900,
             "airline": "제주항공"
           }
         ],
         "2026-09-18": [
           {
-            "snapshot_at": "2026-08-13T15:27:57.517386+09:00",
-            "price": 315000,
-            "airline": "제주항공"
-          },
-          {
             "snapshot_at": "2026-08-13T17:28:29.624445+09:00",
             "price": 333000,
             "airline": "이스타항공"
@@ -30691,14 +30708,14 @@
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
             "price": 319900,
             "airline": "이스타항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
+            "price": 319900,
+            "airline": "이스타항공"
           }
         ],
         "2026-09-25": [
-          {
-            "snapshot_at": "2026-06-20T21:17:50.323695+09:00",
-            "price": 513900,
-            "airline": "이스타항공"
-          },
           {
             "snapshot_at": "2026-06-20T22:17:36.345396+09:00",
             "price": 513900,
@@ -31693,14 +31710,14 @@
             "snapshot_at": "2026-08-21T22:28:47.742301+09:00",
             "price": 599000,
             "airline": "티웨이항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
+            "price": 399600,
+            "airline": "티웨이항공"
           }
         ],
         "2026-10-02": [
-          {
-            "snapshot_at": "2026-08-13T16:30:10.002487+09:00",
-            "price": 490100,
-            "airline": "이스타항공"
-          },
           {
             "snapshot_at": "2026-08-13T17:28:29.624445+09:00",
             "price": 490100,
@@ -32695,14 +32712,14 @@
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
             "price": 477800,
             "airline": "티웨이항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
+            "price": 477800,
+            "airline": "티웨이항공"
           }
         ],
         "2026-10-09": [
-          {
-            "snapshot_at": "2026-06-21T16:17:29.711042+09:00",
-            "price": 506820,
-            "airline": "티웨이항공"
-          },
           {
             "snapshot_at": "2026-06-21T17:17:48.477582+09:00",
             "price": 506820,
@@ -33697,14 +33714,14 @@
             "snapshot_at": "2026-08-21T20:28:18.309079+09:00",
             "price": 691400,
             "airline": "아시아나항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
+            "price": 691300,
+            "airline": "아시아나항공"
           }
         ],
         "2026-10-16": [
-          {
-            "snapshot_at": "2026-08-13T16:30:10.002487+09:00",
-            "price": 402900,
-            "airline": "이스타항공"
-          },
           {
             "snapshot_at": "2026-08-13T17:28:29.624445+09:00",
             "price": 402900,
@@ -34697,17 +34714,17 @@
           },
           {
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
+            "price": 397500,
+            "airline": "이스타항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
             "price": 397500,
             "airline": "이스타항공"
           }
         ],
         "2026-10-23": [
           {
-            "snapshot_at": "2026-08-13T16:30:10.002487+09:00",
-            "price": 410600,
-            "airline": "이스타항공"
-          },
-          {
             "snapshot_at": "2026-08-13T17:28:29.624445+09:00",
             "price": 410600,
             "airline": "이스타항공"
@@ -35701,14 +35718,14 @@
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
             "price": 409500,
             "airline": "이스타항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
+            "price": 409500,
+            "airline": "이스타항공"
           }
         ],
         "2026-10-30": [
-          {
-            "snapshot_at": "2026-08-13T14:28:45.221140+09:00",
-            "price": 406000,
-            "airline": "이스타항공"
-          },
           {
             "snapshot_at": "2026-08-13T15:27:57.517386+09:00",
             "price": 406000,
@@ -36703,14 +36720,14 @@
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
             "price": 413600,
             "airline": "이스타항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
+            "price": 413600,
+            "airline": "이스타항공"
           }
         ],
         "2026-11-06": [
-          {
-            "snapshot_at": "2026-08-13T14:28:45.221140+09:00",
-            "price": 423500,
-            "airline": "이스타항공"
-          },
           {
             "snapshot_at": "2026-08-13T15:27:57.517386+09:00",
             "price": 423500,
@@ -37705,14 +37722,14 @@
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
             "price": 422300,
             "airline": "이스타항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
+            "price": 422300,
+            "airline": "이스타항공"
           }
         ],
         "2026-11-13": [
-          {
-            "snapshot_at": "2026-08-13T16:30:10.002487+09:00",
-            "price": 406500,
-            "airline": "이스타항공"
-          },
           {
             "snapshot_at": "2026-08-13T17:28:29.624445+09:00",
             "price": 406500,
@@ -38705,17 +38722,17 @@
           },
           {
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
+            "price": 406500,
+            "airline": "이스타항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
             "price": 406500,
             "airline": "이스타항공"
           }
         ],
         "2026-11-20": [
           {
-            "snapshot_at": "2026-08-13T15:27:57.517386+09:00",
-            "price": 414800,
-            "airline": "이스타항공"
-          },
-          {
             "snapshot_at": "2026-08-13T16:30:10.002487+09:00",
             "price": 414800,
             "airline": "이스타항공"
@@ -39709,14 +39726,14 @@
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
             "price": 413600,
             "airline": "이스타항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
+            "price": 413600,
+            "airline": "이스타항공"
           }
         ],
         "2026-11-27": [
-          {
-            "snapshot_at": "2026-08-13T15:27:57.517386+09:00",
-            "price": 388800,
-            "airline": "이스타항공"
-          },
           {
             "snapshot_at": "2026-08-13T16:30:10.002487+09:00",
             "price": 388800,
@@ -40709,6 +40726,11 @@
           },
           {
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
+            "price": 396300,
+            "airline": "이스타항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
             "price": 396300,
             "airline": "이스타항공"
           }
@@ -41548,6 +41570,18 @@
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
             "price": 396300,
             "airline": "이스타항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
+            "price": 396300,
+            "airline": "이스타항공"
+          }
+        ],
+        "2026-12-11": [
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
+            "price": 423000,
+            "airline": "이스타항공"
           }
         ]
       }
@@ -41558,48 +41592,37 @@
       "label": "🇯🇵 도쿄 나리타",
       "weeks": [
         {
-          "depart_date": "2026-08-21",
-          "return_date": "2026-08-23",
-          "min_price": 485500,
-          "airline": "대한항공",
-          "flight_info": "18:35 ICN→NRT 21:05 / 20:55 NRT→ICN 23:25",
-          "kal_price": 485500,
-          "kal_flight_info": "18:35 ICN→NRT 21:05 / 20:55 NRT→ICN 23:25",
-          "pax3_price": null,
-          "updated_at": "2026-08-21T23:13:31.498503+09:00"
-        },
-        {
           "depart_date": "2026-08-28",
           "return_date": "2026-08-30",
-          "min_price": 381700,
+          "min_price": 298300,
           "airline": "대한항공",
           "flight_info": "18:35 ICN→NRT 21:05 / 20:55 NRT→ICN 23:25",
-          "kal_price": 381700,
+          "kal_price": 298300,
           "kal_flight_info": "18:35 ICN→NRT 21:05 / 20:55 NRT→ICN 23:25",
           "pax3_price": null,
-          "updated_at": "2026-08-21T23:13:44.203266+09:00"
+          "updated_at": "2026-08-22T00:13:21.156488+09:00"
         },
         {
           "depart_date": "2026-09-04",
           "return_date": "2026-09-06",
-          "min_price": 304500,
-          "airline": "에어서울",
-          "flight_info": "18:40 ICN→NRT 21:05 / 22:05 NRT→ICN 00:45",
-          "kal_price": null,
-          "kal_flight_info": null,
+          "min_price": 302500,
+          "airline": "대한항공",
+          "flight_info": "18:35 ICN→NRT 21:05 / 19:00 NRT→ICN 21:30",
+          "kal_price": 302500,
+          "kal_flight_info": "18:35 ICN→NRT 21:05 / 19:00 NRT→ICN 21:30",
           "pax3_price": -1,
-          "updated_at": "2026-08-21T23:13:49.934024+09:00"
+          "updated_at": "2026-08-22T00:13:31.298930+09:00"
         },
         {
           "depart_date": "2026-09-11",
           "return_date": "2026-09-13",
-          "min_price": 368200,
+          "min_price": 289600,
           "airline": "대한항공",
           "flight_info": "18:35 ICN→NRT 21:05 / 20:55 NRT→ICN 23:25",
-          "kal_price": 368200,
+          "kal_price": 289600,
           "kal_flight_info": "18:35 ICN→NRT 21:05 / 20:55 NRT→ICN 23:25",
-          "pax3_price": null,
-          "updated_at": "2026-08-21T23:13:58.221819+09:00"
+          "pax3_price": 357500,
+          "updated_at": "2026-08-22T00:13:38.852744+09:00"
         },
         {
           "depart_date": "2026-09-18",
@@ -41607,10 +41630,32 @@
           "min_price": 377800,
           "airline": "아시아나항공",
           "flight_info": "18:30 ICN→NRT 21:00 / 19:45 NRT→ICN 22:15",
-          "kal_price": 476200,
+          "kal_price": 437600,
           "kal_flight_info": "18:35 ICN→NRT 21:05 / 20:55 NRT→ICN 23:25",
           "pax3_price": null,
-          "updated_at": "2026-08-21T23:14:05.053545+09:00"
+          "updated_at": "2026-08-22T00:13:49.143923+09:00"
+        },
+        {
+          "depart_date": "2026-09-25",
+          "return_date": "2026-09-27",
+          "min_price": 669700,
+          "airline": "대한항공",
+          "flight_info": "18:30 ICN→NRT 21:00 / 20:55 NRT→ICN 23:25",
+          "kal_price": 669700,
+          "kal_flight_info": "18:30 ICN→NRT 21:00 / 20:55 NRT→ICN 23:25",
+          "pax3_price": null,
+          "updated_at": "2026-08-22T00:13:57.440315+09:00"
+        },
+        {
+          "depart_date": "2026-10-02",
+          "return_date": "2026-10-04",
+          "min_price": 532500,
+          "airline": "아시아나항공",
+          "flight_info": "18:30 ICN→NRT 21:00 / 19:45 NRT→ICN 22:15",
+          "kal_price": 624800,
+          "kal_flight_info": "18:35 ICN→NRT 21:05 / 18:25 NRT→ICN 20:55",
+          "pax3_price": null,
+          "updated_at": "2026-08-22T00:14:10.368661+09:00"
         },
         {
           "depart_date": "2026-10-09",
@@ -41618,10 +41663,10 @@
           "min_price": 554500,
           "airline": "아시아나항공",
           "flight_info": "18:30 ICN→NRT 21:00 / 19:45 NRT→ICN 22:15",
-          "kal_price": 638200,
+          "kal_price": 597700,
           "kal_flight_info": "18:35 ICN→NRT 21:05 / 20:55 NRT→ICN 23:25",
           "pax3_price": null,
-          "updated_at": "2026-08-21T23:14:50.900937+09:00"
+          "updated_at": "2026-08-22T00:14:17.154336+09:00"
         },
         {
           "depart_date": "2026-10-16",
@@ -41635,26 +41680,15 @@
           "updated_at": "2026-08-21T23:14:58.291017+09:00"
         },
         {
-          "depart_date": "2026-10-30",
-          "return_date": "2026-11-01",
-          "min_price": 660000,
-          "airline": "아시아나항공",
-          "flight_info": "18:45 ICN→NRT 21:05 / 19:35 NRT→ICN 22:25",
-          "kal_price": 672400,
-          "kal_flight_info": "18:45 ICN→NRT 21:05 / 19:35 NRT→ICN 22:25",
-          "pax3_price": null,
-          "updated_at": "2026-08-21T23:15:22.743083+09:00"
-        },
-        {
           "depart_date": "2026-11-06",
           "return_date": "2026-11-08",
           "min_price": 604000,
           "airline": "아시아나항공",
           "flight_info": "18:40 ICN→NRT 21:00 / 19:35 NRT→ICN 22:25",
-          "kal_price": 619900,
+          "kal_price": 629200,
           "kal_flight_info": "18:45 ICN→NRT 21:05 / 20:40 NRT→ICN 23:25",
           "pax3_price": null,
-          "updated_at": "2026-08-21T23:15:33.539548+09:00"
+          "updated_at": "2026-08-22T00:15:07.404660+09:00"
         },
         {
           "depart_date": "2026-11-13",
@@ -41662,10 +41696,10 @@
           "min_price": 572900,
           "airline": "아시아나항공",
           "flight_info": "18:40 ICN→NRT 21:00 / 19:35 NRT→ICN 22:25",
-          "kal_price": 606700,
+          "kal_price": 667500,
           "kal_flight_info": "18:45 ICN→NRT 21:05 / 17:10 NRT→ICN 19:55",
           "pax3_price": null,
-          "updated_at": "2026-08-21T23:15:46.385496+09:00"
+          "updated_at": "2026-08-22T00:15:15.840917+09:00"
         },
         {
           "depart_date": "2026-11-20",
@@ -41673,10 +41707,10 @@
           "min_price": 606700,
           "airline": "대한항공",
           "flight_info": "18:45 ICN→NRT 21:05 / 20:40 NRT→ICN 23:25",
-          "kal_price": 629100,
+          "kal_price": 606800,
           "kal_flight_info": "18:45 ICN→NRT 21:05 / 20:40 NRT→ICN 23:25",
           "pax3_price": null,
-          "updated_at": "2026-08-21T23:15:58.643385+09:00"
+          "updated_at": "2026-08-22T00:15:27.596605+09:00"
         },
         {
           "depart_date": "2026-11-27",
@@ -41684,10 +41718,10 @@
           "min_price": 532400,
           "airline": "아시아나항공",
           "flight_info": "18:40 ICN→NRT 21:00 / 19:35 NRT→ICN 22:25",
-          "kal_price": 543700,
+          "kal_price": 597500,
           "kal_flight_info": "18:45 ICN→NRT 21:05 / 20:40 NRT→ICN 23:25",
           "pax3_price": null,
-          "updated_at": "2026-08-21T23:16:12.282516+09:00"
+          "updated_at": "2026-08-22T00:15:36.110566+09:00"
         },
         {
           "depart_date": "2026-12-04",
@@ -41699,15 +41733,20 @@
           "kal_flight_info": "18:45 ICN→NRT 21:05 / 17:10 NRT→ICN 19:55",
           "pax3_price": null,
           "updated_at": "2026-08-21T21:15:51.774209+09:00"
+        },
+        {
+          "depart_date": "2026-12-11",
+          "return_date": "2026-12-13",
+          "min_price": 597000,
+          "airline": "대한항공",
+          "flight_info": "18:45 ICN→NRT 21:05 / 17:10 NRT→ICN 19:55",
+          "kal_price": 597000,
+          "kal_flight_info": "18:45 ICN→NRT 21:05 / 17:10 NRT→ICN 19:55",
+          "pax3_price": null,
+          "updated_at": "2026-08-22T00:16:00.984034+09:00"
         }
       ],
       "overall_history": [
-        {
-          "snapshot_at": "2026-08-13T16:30:10.002487+09:00",
-          "price": 333500,
-          "airline": "티웨이항공",
-          "depart_date": "2026-09-04"
-        },
         {
           "snapshot_at": "2026-08-13T17:28:29.624445+09:00",
           "price": 333500,
@@ -42901,6 +42940,12 @@
           "price": 304500,
           "airline": "에어서울",
           "depart_date": "2026-09-04"
+        },
+        {
+          "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
+          "price": 289600,
+          "airline": "대한항공",
+          "depart_date": "2026-09-11"
         }
       ],
       "weekly_history": {
@@ -58252,11 +58297,6 @@
         ],
         "2026-08-28": [
           {
-            "snapshot_at": "2026-08-12T22:28:16.382232+09:00",
-            "price": 340100,
-            "airline": "티웨이항공"
-          },
-          {
             "snapshot_at": "2026-08-12T23:28:46.416841+09:00",
             "price": 340100,
             "airline": "티웨이항공"
@@ -59250,14 +59290,14 @@
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
             "price": 381700,
             "airline": "대한항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
+            "price": 298300,
+            "airline": "대한항공"
           }
         ],
         "2026-09-04": [
-          {
-            "snapshot_at": "2026-08-13T06:28:10.483391+09:00",
-            "price": 333500,
-            "airline": "티웨이항공"
-          },
           {
             "snapshot_at": "2026-08-13T07:27:54.227120+09:00",
             "price": 333500,
@@ -60252,14 +60292,14 @@
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
             "price": 304500,
             "airline": "에어서울"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
+            "price": 302500,
+            "airline": "대한항공"
           }
         ],
         "2026-09-11": [
-          {
-            "snapshot_at": "2026-08-13T09:27:52.910341+09:00",
-            "price": 334000,
-            "airline": "아시아나항공"
-          },
           {
             "snapshot_at": "2026-08-13T10:28:32.117539+09:00",
             "price": 334000,
@@ -61254,14 +61294,14 @@
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
             "price": 368200,
             "airline": "대한항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
+            "price": 289600,
+            "airline": "대한항공"
           }
         ],
         "2026-09-18": [
-          {
-            "snapshot_at": "2026-08-13T16:30:10.002487+09:00",
-            "price": 377800,
-            "airline": "아시아나항공"
-          },
           {
             "snapshot_at": "2026-08-13T17:28:29.624445+09:00",
             "price": 377800,
@@ -62256,14 +62296,14 @@
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
             "price": 377800,
             "airline": "아시아나항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
+            "price": 377800,
+            "airline": "아시아나항공"
           }
         ],
         "2026-09-25": [
-          {
-            "snapshot_at": "2026-08-10T15:28:12.150210+09:00",
-            "price": 655700,
-            "airline": "티웨이항공"
-          },
           {
             "snapshot_at": "2026-08-10T16:28:02.280872+09:00",
             "price": 625200,
@@ -63258,14 +63298,14 @@
             "snapshot_at": "2026-08-21T20:28:18.309079+09:00",
             "price": 737400,
             "airline": "대한항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
+            "price": 669700,
+            "airline": "대한항공"
           }
         ],
         "2026-10-02": [
-          {
-            "snapshot_at": "2026-08-11T17:27:33.537232+09:00",
-            "price": 545700,
-            "airline": "아시아나항공"
-          },
           {
             "snapshot_at": "2026-08-11T19:28:07.299093+09:00",
             "price": 545700,
@@ -64260,14 +64300,14 @@
             "snapshot_at": "2026-08-21T21:27:53.669938+09:00",
             "price": 581900,
             "airline": "아시아나항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
+            "price": 532500,
+            "airline": "아시아나항공"
           }
         ],
         "2026-10-09": [
-          {
-            "snapshot_at": "2026-08-13T16:30:10.002487+09:00",
-            "price": 573200,
-            "airline": "아시아나항공"
-          },
           {
             "snapshot_at": "2026-08-13T17:28:29.624445+09:00",
             "price": 573200,
@@ -65260,17 +65300,17 @@
           },
           {
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
+            "price": 554500,
+            "airline": "아시아나항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
             "price": 554500,
             "airline": "아시아나항공"
           }
         ],
         "2026-10-16": [
           {
-            "snapshot_at": "2026-08-13T16:30:10.002487+09:00",
-            "price": 446500,
-            "airline": "아시아나항공"
-          },
-          {
             "snapshot_at": "2026-08-13T17:28:29.624445+09:00",
             "price": 446500,
             "airline": "아시아나항공"
@@ -66262,6 +66302,11 @@
           },
           {
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
+            "price": 428500,
+            "airline": "아시아나항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
             "price": 428500,
             "airline": "아시아나항공"
           }
@@ -68272,11 +68317,6 @@
         ],
         "2026-11-06": [
           {
-            "snapshot_at": "2026-08-13T10:28:32.117539+09:00",
-            "price": 460700,
-            "airline": "아시아나항공"
-          },
-          {
             "snapshot_at": "2026-08-13T11:28:11.174817+09:00",
             "price": 460700,
             "airline": "아시아나항공"
@@ -69270,14 +69310,14 @@
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
             "price": 604000,
             "airline": "아시아나항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
+            "price": 604000,
+            "airline": "아시아나항공"
           }
         ],
         "2026-11-13": [
-          {
-            "snapshot_at": "2026-08-13T07:27:54.227120+09:00",
-            "price": 528000,
-            "airline": "아시아나항공"
-          },
           {
             "snapshot_at": "2026-08-13T08:27:47.304323+09:00",
             "price": 528000,
@@ -70272,14 +70312,14 @@
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
             "price": 572900,
             "airline": "아시아나항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
+            "price": 572900,
+            "airline": "아시아나항공"
           }
         ],
         "2026-11-20": [
-          {
-            "snapshot_at": "2026-08-13T12:28:08.702536+09:00",
-            "price": 568500,
-            "airline": "아시아나항공"
-          },
           {
             "snapshot_at": "2026-08-13T13:28:07.266886+09:00",
             "price": 568500,
@@ -71274,14 +71314,14 @@
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
             "price": 606700,
             "airline": "대한항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
+            "price": 606700,
+            "airline": "대한항공"
           }
         ],
         "2026-11-27": [
-          {
-            "snapshot_at": "2026-08-13T09:27:52.910341+09:00",
-            "price": 433700,
-            "airline": "아시아나항공"
-          },
           {
             "snapshot_at": "2026-08-13T10:28:32.117539+09:00",
             "price": 433700,
@@ -72276,6 +72316,11 @@
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
             "price": 532400,
             "airline": "아시아나항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
+            "price": 532400,
+            "airline": "아시아나항공"
           }
         ],
         "2026-12-04": [
@@ -73113,6 +73158,18 @@
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
             "price": 437900,
             "airline": "아시아나항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
+            "price": 437900,
+            "airline": "아시아나항공"
+          }
+        ],
+        "2026-12-11": [
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
+            "price": 597000,
+            "airline": "대한항공"
           }
         ]
       }
@@ -73123,26 +73180,15 @@
       "label": "🇯🇵 도쿄 하네다",
       "weeks": [
         {
-          "depart_date": "2026-08-21",
-          "return_date": "2026-08-23",
-          "min_price": 499900,
-          "airline": "전일본공수",
-          "flight_info": "19:55 GMP→HND 22:15 / 20:05 HND→GMP 22:20",
-          "kal_price": 724400,
-          "kal_flight_info": "18:40 GMP→HND 21:00 / 18:55 HND→GMP 21:15",
-          "pax3_price": null,
-          "updated_at": "2026-08-21T23:16:30.329036+09:00"
-        },
-        {
           "depart_date": "2026-08-28",
           "return_date": "2026-08-30",
           "min_price": 559200,
           "airline": "아시아나항공",
           "flight_info": "19:50 GMP→HND 22:00 / 20:05 HND→GMP 22:25",
-          "kal_price": 824700,
-          "kal_flight_info": "18:40 GMP→HND 21:00 / 18:55 HND→GMP 21:15",
+          "kal_price": 674900,
+          "kal_flight_info": "18:40 GMP→HND 21:00 / 19:55 HND→GMP 22:15",
           "pax3_price": null,
-          "updated_at": "2026-08-21T23:16:36.372797+09:00"
+          "updated_at": "2026-08-22T00:16:07.360664+09:00"
         },
         {
           "depart_date": "2026-09-04",
@@ -73150,10 +73196,10 @@
           "min_price": 460400,
           "airline": "아시아나항공",
           "flight_info": "19:50 GMP→HND 22:00 / 20:05 HND→GMP 22:25",
-          "kal_price": 745500,
-          "kal_flight_info": "18:40 GMP→HND 21:00 / 18:55 HND→GMP 21:15",
-          "pax3_price": 485800,
-          "updated_at": "2026-08-21T23:16:47.144869+09:00"
+          "kal_price": 627700,
+          "kal_flight_info": "18:40 GMP→HND 21:00 / 19:55 HND→GMP 22:15",
+          "pax3_price": 515300,
+          "updated_at": "2026-08-22T00:16:15.607982+09:00"
         },
         {
           "depart_date": "2026-09-11",
@@ -73161,10 +73207,10 @@
           "min_price": 478300,
           "airline": "아시아나항공",
           "flight_info": "19:50 GMP→HND 22:00 / 20:05 HND→GMP 22:25",
-          "kal_price": 525900,
+          "kal_price": 557700,
           "kal_flight_info": "18:40 GMP→HND 21:00 / 19:55 HND→GMP 22:15",
           "pax3_price": 563200,
-          "updated_at": "2026-08-21T23:16:52.783779+09:00"
+          "updated_at": "2026-08-22T00:16:23.527021+09:00"
         },
         {
           "depart_date": "2026-09-18",
@@ -73172,10 +73218,10 @@
           "min_price": 521500,
           "airline": "대한항공",
           "flight_info": "18:40 GMP→HND 21:00 / 19:55 HND→GMP 22:15",
-          "kal_price": 613600,
+          "kal_price": 613700,
           "kal_flight_info": "18:40 GMP→HND 21:00 / 19:55 HND→GMP 22:15",
           "pax3_price": null,
-          "updated_at": "2026-08-21T23:17:01.310471+09:00"
+          "updated_at": "2026-08-22T00:16:28.080233+09:00"
         },
         {
           "depart_date": "2026-09-25",
@@ -73194,10 +73240,10 @@
           "min_price": 638300,
           "airline": "아시아나항공",
           "flight_info": "19:50 GMP→HND 22:00 / 20:05 HND→GMP 22:25",
-          "kal_price": 687900,
+          "kal_price": 688000,
           "kal_flight_info": "18:40 GMP→HND 21:00 / 19:55 HND→GMP 22:15",
           "pax3_price": null,
-          "updated_at": "2026-08-21T23:17:15.758692+09:00"
+          "updated_at": "2026-08-22T00:16:45.102759+09:00"
         },
         {
           "depart_date": "2026-10-09",
@@ -73205,10 +73251,10 @@
           "min_price": 657400,
           "airline": "전일본공수",
           "flight_info": "19:55 GMP→HND 22:15 / 20:05 HND→GMP 22:20",
-          "kal_price": 705900,
+          "kal_price": 730700,
           "kal_flight_info": "18:40 GMP→HND 21:00 / 19:55 HND→GMP 22:15",
           "pax3_price": null,
-          "updated_at": "2026-08-21T23:17:21.527041+09:00"
+          "updated_at": "2026-08-22T00:16:50.717719+09:00"
         },
         {
           "depart_date": "2026-10-16",
@@ -73216,10 +73262,10 @@
           "min_price": 614300,
           "airline": "전일본공수",
           "flight_info": "19:55 GMP→HND 22:15 / 20:05 HND→GMP 22:20",
-          "kal_price": 687700,
+          "kal_price": 718900,
           "kal_flight_info": "18:40 GMP→HND 21:00 / 19:55 HND→GMP 22:15",
           "pax3_price": null,
-          "updated_at": "2026-08-21T23:17:29.102220+09:00"
+          "updated_at": "2026-08-22T00:16:57.565792+09:00"
         },
         {
           "depart_date": "2026-10-23",
@@ -73227,10 +73273,10 @@
           "min_price": 667400,
           "airline": "아시아나항공",
           "flight_info": "19:50 GMP→HND 22:00 / 20:05 HND→GMP 22:35",
-          "kal_price": 712200,
+          "kal_price": 701500,
           "kal_flight_info": "18:40 GMP→HND 21:00 / 19:50 HND→GMP 22:25",
           "pax3_price": null,
-          "updated_at": "2026-08-21T23:17:34.721955+09:00"
+          "updated_at": "2026-08-22T00:17:03.851615+09:00"
         },
         {
           "depart_date": "2026-10-30",
@@ -73238,10 +73284,10 @@
           "min_price": 596300,
           "airline": "전일본공수",
           "flight_info": "19:50 GMP→HND 21:55 / 20:00 HND→GMP 22:30",
-          "kal_price": 698400,
+          "kal_price": 674500,
           "kal_flight_info": "19:30 GMP→HND 21:35 / 19:50 HND→GMP 22:25",
           "pax3_price": null,
-          "updated_at": "2026-08-21T23:17:39.984993+09:00"
+          "updated_at": "2026-08-22T00:17:09.074082+09:00"
         },
         {
           "depart_date": "2026-11-06",
@@ -73249,10 +73295,10 @@
           "min_price": 602500,
           "airline": "전일본공수",
           "flight_info": "19:50 GMP→HND 21:55 / 20:00 HND→GMP 22:30",
-          "kal_price": 687900,
+          "kal_price": 712300,
           "kal_flight_info": "19:30 GMP→HND 21:35 / 19:50 HND→GMP 22:25",
           "pax3_price": null,
-          "updated_at": "2026-08-21T23:17:46.267183+09:00"
+          "updated_at": "2026-08-22T00:17:15.791288+09:00"
         },
         {
           "depart_date": "2026-11-13",
@@ -73260,10 +73306,10 @@
           "min_price": 602200,
           "airline": "전일본공수",
           "flight_info": "19:50 GMP→HND 21:55 / 20:00 HND→GMP 22:30",
-          "kal_price": 687900,
+          "kal_price": 701300,
           "kal_flight_info": "19:30 GMP→HND 21:35 / 19:50 HND→GMP 22:25",
           "pax3_price": null,
-          "updated_at": "2026-08-21T23:17:52.550082+09:00"
+          "updated_at": "2026-08-22T00:17:21.561602+09:00"
         },
         {
           "depart_date": "2026-11-20",
@@ -73271,10 +73317,10 @@
           "min_price": 639400,
           "airline": "전일본공수",
           "flight_info": "19:50 GMP→HND 21:55 / 20:00 HND→GMP 22:30",
-          "kal_price": 687900,
+          "kal_price": 732500,
           "kal_flight_info": "19:30 GMP→HND 21:35 / 19:50 HND→GMP 22:25",
           "pax3_price": null,
-          "updated_at": "2026-08-21T23:18:01.338659+09:00"
+          "updated_at": "2026-08-22T00:17:29.068443+09:00"
         },
         {
           "depart_date": "2026-11-27",
@@ -73282,10 +73328,10 @@
           "min_price": 546200,
           "airline": "아시아나항공",
           "flight_info": "19:35 GMP→HND 21:45 / 20:05 HND→GMP 22:35",
-          "kal_price": 660900,
+          "kal_price": 684700,
           "kal_flight_info": "19:30 GMP→HND 21:35 / 19:50 HND→GMP 22:25",
           "pax3_price": 571000,
-          "updated_at": "2026-08-21T23:18:08.099351+09:00"
+          "updated_at": "2026-08-22T00:17:35.615944+09:00"
         },
         {
           "depart_date": "2026-12-04",
@@ -73293,19 +73339,24 @@
           "min_price": 550500,
           "airline": "아시아나항공",
           "flight_info": "19:35 GMP→HND 21:45 / 20:05 HND→GMP 22:35",
-          "kal_price": 660900,
+          "kal_price": 661000,
           "kal_flight_info": "19:30 GMP→HND 21:35 / 19:50 HND→GMP 22:25",
           "pax3_price": null,
-          "updated_at": "2026-08-21T23:18:14.697006+09:00"
+          "updated_at": "2026-08-22T00:17:43.580672+09:00"
+        },
+        {
+          "depart_date": "2026-12-11",
+          "return_date": "2026-12-13",
+          "min_price": 649600,
+          "airline": "전일본공수",
+          "flight_info": "19:50 GMP→HND 21:55 / 20:00 HND→GMP 22:30",
+          "kal_price": 747700,
+          "kal_flight_info": "19:30 GMP→HND 21:35 / 19:50 HND→GMP 22:25",
+          "pax3_price": null,
+          "updated_at": "2026-08-22T00:17:49.368353+09:00"
         }
       ],
       "overall_history": [
-        {
-          "snapshot_at": "2026-08-13T16:30:10.002487+09:00",
-          "price": 460400,
-          "airline": "아시아나항공",
-          "depart_date": "2026-09-04"
-        },
         {
           "snapshot_at": "2026-08-13T17:28:29.624445+09:00",
           "price": 460400,
@@ -74496,6 +74547,12 @@
         },
         {
           "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
+          "price": 460400,
+          "airline": "아시아나항공",
+          "depart_date": "2026-09-04"
+        },
+        {
+          "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
           "price": 460400,
           "airline": "아시아나항공",
           "depart_date": "2026-09-04"
@@ -100350,11 +100407,6 @@
         ],
         "2026-08-28": [
           {
-            "snapshot_at": "2026-08-13T16:30:10.002487+09:00",
-            "price": 559200,
-            "airline": "아시아나항공"
-          },
-          {
             "snapshot_at": "2026-08-13T17:28:29.624445+09:00",
             "price": 559200,
             "airline": "아시아나항공"
@@ -101346,17 +101398,17 @@
           },
           {
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
+            "price": 559200,
+            "airline": "아시아나항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
             "price": 559200,
             "airline": "아시아나항공"
           }
         ],
         "2026-09-04": [
           {
-            "snapshot_at": "2026-08-13T16:30:10.002487+09:00",
-            "price": 460400,
-            "airline": "아시아나항공"
-          },
-          {
             "snapshot_at": "2026-08-13T17:28:29.624445+09:00",
             "price": 460400,
             "airline": "아시아나항공"
@@ -102348,17 +102400,17 @@
           },
           {
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
+            "price": 460400,
+            "airline": "아시아나항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
             "price": 460400,
             "airline": "아시아나항공"
           }
         ],
         "2026-09-11": [
           {
-            "snapshot_at": "2026-08-13T16:30:10.002487+09:00",
-            "price": 478400,
-            "airline": "아시아나항공"
-          },
-          {
             "snapshot_at": "2026-08-13T17:28:29.624445+09:00",
             "price": 478400,
             "airline": "아시아나항공"
@@ -103352,14 +103404,14 @@
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
             "price": 478300,
             "airline": "아시아나항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
+            "price": 478300,
+            "airline": "아시아나항공"
           }
         ],
         "2026-09-18": [
-          {
-            "snapshot_at": "2026-08-13T16:30:10.002487+09:00",
-            "price": 572900,
-            "airline": "대한항공"
-          },
           {
             "snapshot_at": "2026-08-13T17:28:29.624445+09:00",
             "price": 572900,
@@ -104354,14 +104406,14 @@
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
             "price": 521500,
             "airline": "대한항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
+            "price": 521500,
+            "airline": "대한항공"
           }
         ],
         "2026-09-25": [
-          {
-            "snapshot_at": "2026-06-13T16:20:45.038358+09:00",
-            "price": 1385000,
-            "airline": "전일본공수"
-          },
           {
             "snapshot_at": "2026-06-13T17:17:13.522533+09:00",
             "price": 1385000,
@@ -105356,14 +105408,14 @@
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
             "price": 783900,
             "airline": "전일본공수"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
+            "price": 783900,
+            "airline": "전일본공수"
           }
         ],
         "2026-10-02": [
-          {
-            "snapshot_at": "2026-08-13T16:30:10.002487+09:00",
-            "price": 658200,
-            "airline": "아시아나항공"
-          },
           {
             "snapshot_at": "2026-08-13T17:28:29.624445+09:00",
             "price": 658200,
@@ -106356,17 +106408,17 @@
           },
           {
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
+            "price": 638300,
+            "airline": "아시아나항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
             "price": 638300,
             "airline": "아시아나항공"
           }
         ],
         "2026-10-09": [
           {
-            "snapshot_at": "2026-08-13T16:30:10.002487+09:00",
-            "price": 689700,
-            "airline": "아시아나항공"
-          },
-          {
             "snapshot_at": "2026-08-13T17:28:29.624445+09:00",
             "price": 689700,
             "airline": "아시아나항공"
@@ -107358,17 +107410,17 @@
           },
           {
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
+            "price": 657400,
+            "airline": "전일본공수"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
             "price": 657400,
             "airline": "전일본공수"
           }
         ],
         "2026-10-16": [
           {
-            "snapshot_at": "2026-08-13T16:30:10.002487+09:00",
-            "price": 614300,
-            "airline": "전일본공수"
-          },
-          {
             "snapshot_at": "2026-08-13T17:28:29.624445+09:00",
             "price": 614300,
             "airline": "전일본공수"
@@ -108360,17 +108412,17 @@
           },
           {
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
+            "price": 614300,
+            "airline": "전일본공수"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
             "price": 614300,
             "airline": "전일본공수"
           }
         ],
         "2026-10-23": [
           {
-            "snapshot_at": "2026-08-13T16:30:10.002487+09:00",
-            "price": 667400,
-            "airline": "아시아나항공"
-          },
-          {
             "snapshot_at": "2026-08-13T17:28:29.624445+09:00",
             "price": 667400,
             "airline": "아시아나항공"
@@ -109362,17 +109414,17 @@
           },
           {
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
+            "price": 667400,
+            "airline": "아시아나항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
             "price": 667400,
             "airline": "아시아나항공"
           }
         ],
         "2026-10-30": [
           {
-            "snapshot_at": "2026-08-13T16:30:10.002487+09:00",
-            "price": 596300,
-            "airline": "전일본공수"
-          },
-          {
             "snapshot_at": "2026-08-13T17:28:29.624445+09:00",
             "price": 596300,
             "airline": "전일본공수"
@@ -110364,17 +110416,17 @@
           },
           {
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
+            "price": 596300,
+            "airline": "전일본공수"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
             "price": 596300,
             "airline": "전일본공수"
           }
         ],
         "2026-11-06": [
           {
-            "snapshot_at": "2026-08-13T16:30:10.002487+09:00",
-            "price": 620100,
-            "airline": "전일본공수"
-          },
-          {
             "snapshot_at": "2026-08-13T17:28:29.624445+09:00",
             "price": 620100,
             "airline": "전일본공수"
@@ -111368,14 +111420,14 @@
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
             "price": 602500,
             "airline": "전일본공수"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
+            "price": 602500,
+            "airline": "전일본공수"
           }
         ],
         "2026-11-13": [
-          {
-            "snapshot_at": "2026-08-13T16:30:10.002487+09:00",
-            "price": 619300,
-            "airline": "전일본공수"
-          },
           {
             "snapshot_at": "2026-08-13T17:28:29.624445+09:00",
             "price": 619300,
@@ -112370,14 +112422,14 @@
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
             "price": 602200,
             "airline": "전일본공수"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
+            "price": 602200,
+            "airline": "전일본공수"
           }
         ],
         "2026-11-20": [
-          {
-            "snapshot_at": "2026-08-13T16:30:10.002487+09:00",
-            "price": 641800,
-            "airline": "전일본공수"
-          },
           {
             "snapshot_at": "2026-08-13T17:28:29.624445+09:00",
             "price": 641800,
@@ -113370,17 +113422,17 @@
           },
           {
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
+            "price": 639400,
+            "airline": "전일본공수"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
             "price": 639400,
             "airline": "전일본공수"
           }
         ],
         "2026-11-27": [
           {
-            "snapshot_at": "2026-08-13T16:30:10.002487+09:00",
-            "price": 546200,
-            "airline": "아시아나항공"
-          },
-          {
             "snapshot_at": "2026-08-13T17:28:29.624445+09:00",
             "price": 546200,
             "airline": "아시아나항공"
@@ -114372,6 +114424,11 @@
           },
           {
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
+            "price": 546200,
+            "airline": "아시아나항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
             "price": 546200,
             "airline": "아시아나항공"
           }
@@ -115216,6 +115273,18 @@
             "snapshot_at": "2026-08-21T23:28:30.985346+09:00",
             "price": 550500,
             "airline": "아시아나항공"
+          },
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
+            "price": 550500,
+            "airline": "아시아나항공"
+          }
+        ],
+        "2026-12-11": [
+          {
+            "snapshot_at": "2026-08-22T00:28:05.464129+09:00",
+            "price": 649600,
+            "airline": "전일본공수"
           }
         ]
       }
